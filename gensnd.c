@@ -1,5 +1,9 @@
 #include <stdio.h>
 
+void gensine() {
+
+}
+
 int getChar(char ch) {
   switch (ch) {
   case '1':
