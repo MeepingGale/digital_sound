@@ -1,10 +1,12 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <math.h>
 
 void gensine(float frequency, float sampleRate, float duration) {
 
 }
 
-int phonePad(char ch) {
+void phonePad(char ch) {
   switch (ch) {
   case '1':
     break;
@@ -44,11 +46,11 @@ int phonePad(char ch) {
     break;
   default:
     printf("Not in the phone pad\n");
-    return 0;
+    //return 0;
   }
-  return 1;
+  //return 1;
 }
 
 void makeSilence(float sampleRate, float duration){
-  
+
 }
