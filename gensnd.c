@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void gensine(float hertz, float sampleRate, float duration) {
+void gensine(float frequency, float sampleRate, float duration) {
 
 }
 
