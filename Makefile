@@ -1,10 +1,10 @@
-all: main gensnd
+all: main main2
 
 main: main.c
 	gcc -Wall -Werror -ggdb3  main.c -o main
 
-gensnd: gensnd.c
-	gcc -Wall -Werror -ggdb3 gensnd.c -o gensnd
+main2: main2.c
+	gcc -Wall -Werror -ggdb3 main2.c -o main2
 
 clean:
-	rm -f main gensnd *~
+	rm -f main main2 *~
