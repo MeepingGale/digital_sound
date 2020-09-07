@@ -4,7 +4,7 @@ void gensine(float frequency, float sampleRate, float duration) {
 
 }
 
-int getChar(char ch) {
+int phonePad(char ch) {
   switch (ch) {
   case '1':
     break;
@@ -43,8 +43,12 @@ int getChar(char ch) {
   case '#':
     break;
   default:
-    printf("Not in the thing\n");
+    printf("Not in the phone pad\n");
     return 0;
   }
   return 1;
+}
+
+void makeSilence(float sampleRate, float duration){
+  
 }
