@@ -15,7 +15,7 @@ int main(int agrc, char * agrv[]) {
     printf("Enter the duration: \n");
     scanf("%f", &duration);
     
-    
+    gensine(frequency, sample_rate, duration);
   
     return 0;
 }
