@@ -1,23 +1,21 @@
 #include <stdio.h>
 #include "gensnd.c"
 
-int frequency;
-int sample_rate;
-int duration;
+float frequency;
+float sample_rate;
+float duration;
 
 int main(int agrc, char * agrv[]) {
 
-  printf("Enter a frequency: \n");
-  scanf("%d", &frequency);
-  printf("Enter a sample rate: \n");
-  scanf("%d", &sample_rate);
-  printf("Enter the duration: \n");
-  scanf("%d", &duration);
-
-  printf("Enter a character: \n");
-  char ch;
-  scanf("%s", &ch);
-  phonePad(ch);
+    printf("Enter a frequency: \n");
+    scanf("%f", &frequency);
+    
+    printf("Enter a sample rate: \n");
+    scanf("%f", &sample_rate);
+    printf("Enter the duration: \n");
+    scanf("%f", &duration);
+    
+    
   
-  return 0;
+    return 0;
 }
