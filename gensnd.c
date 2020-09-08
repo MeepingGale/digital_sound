@@ -52,5 +52,7 @@ void phonePad(char ch) {
 }
 
 void makeSilence(float sampleRate, float duration){
-
+  for(int i = 0; i < sampleRate*duration; i++){
+    printf("%d\n", 0);
+  }
 }
