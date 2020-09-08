@@ -17,7 +17,7 @@ int main(int agrc, char * agrv[]) {
   printf("Enter a character: \n");
   char ch;
   scanf("%s", &ch);
-  getChar(ch);
+  phonePad(ch);
   
   return 0;
 }
