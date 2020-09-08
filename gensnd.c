@@ -52,9 +52,7 @@ void phonePad(char ch) {
     break;
   default:
     printf("Not in the phone pad\n");
-    //return 0;
   }
-  //return 1;
 }
 
 void makeSilence(float sampleRate, float duration){
