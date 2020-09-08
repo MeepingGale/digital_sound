@@ -3,7 +3,13 @@
 #include <math.h>
 
 void gensine(float frequency, float sampleRate, float duration) {
-
+  float radians;
+  for(int i = 0; i < sampleRate*duration;){
+      for(radians = 0; radians < 2*M_PI; radians += (2*M_PI/(sampleRate/frequency))){
+        printf("%.6lf\n", sin(radians));
+        i++;
+      }
+  }
 }
 
 void phonePad(char ch) {
