@@ -34,7 +34,8 @@ int main() {
     // Loop 
     for(int i = 0; i < strlen(str); i++) {
         phonePad(str[i]);
-        makeSilence(8000, 0.25);
+        if(i + 1 != strlen(str))
+            makeSilence(8000, 0.25);
     }
     
     free(str);
