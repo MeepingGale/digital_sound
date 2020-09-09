@@ -26,13 +26,10 @@ int main() {
     scanf("%s", str);
 
     // Repeat until the user inputs 10 digits & checks validity
-    while(strlen(str) != 10) {
-        printf("The length is not 10! Enter a character: \n");
+    while(strlen(str) != 10 || check_validity(str)) {
+        printf("Error! Enter 10 character(s): \n");
         scanf("%s", str);
     }
-    
-    if(check_validity(str))
-        printf("error");
     
     // Loop 
     for(int i = 0; i < strlen(str); i++) {
@@ -40,6 +37,7 @@ int main() {
         makeSilence(8000, 0.25);
     }
     
+    free(str);
 	return 0;
 }
 
