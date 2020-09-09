@@ -6,10 +6,14 @@
 int check_validity(char* str) {
     char* key_pad = "0123456789*#";
 
-    for(int i = 0; i < strlen(str); i++)
-        for(int j = 0; j < strlen(key_pad); j++)
-            if(key_pad[j] != str[i])
+    for(int i = 0; i < strlen(str); i++) {
+        for(int j = 0; j < strlen(key_pad); j++) {
+            if(key_pad[j] == str[i])
+                break;
+            if(j == strlen(str) + 1)
                 return 1;
+        }
+    }
             
     return 0;
 }
@@ -31,10 +35,10 @@ int main() {
         printf("error");
     
     // Loop 
-//    for(int i = 0; i < strlen(str); i++) {
-//        phonePad(str[i]);
-//        makeSilence(8000, 0.25);
-//    }
+    for(int i = 0; i < strlen(str); i++) {
+        phonePad(str[i]);
+        makeSilence(8000, 0.25);
+    }
     
 	return 0;
 }
