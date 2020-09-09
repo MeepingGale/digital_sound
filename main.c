@@ -1,22 +1,75 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "gensnd.c"
 
 float frequency;
 float sample_rate;
 float duration;
 
-int main(int agrc, char * agrv[]) {
+int is_number(char* str) {
+    char* key_pad = "0123456789";
 
-	printf("Enter a frequency: \n");
-    while(1){
-    if(scanf("%f", &frequency) == 1)
-    	break;
+    for(int i = 0; i < strlen(str); i++) {
+        for(int j = 0; j < strlen(key_pad); j++) {
+            if(key_pad[j] == str[i])
+                break;
+            if(j == strlen(str) + 1)
+                return 0;
+        }
     }
+            
+    return 1;
+}
+
+int main(int agrc, char * agrv[]) {
+    char temp;
+    int run = 1;
+    
+	printf("Enter a frequency: \n");
+    scanf("%s", &temp);
+    
+    while(run) {
+        if(!is_number(&temp)) {
+            printf("Enter a frequency: \n");
+            scanf("%s", &temp);
+        } else {
+            frequency = atoi(&temp);
+            run = 0;
+        }
+    }
+    
+    run = 1;
+    temp = '\n';
+    
     printf("Enter a sample rate: \n");
-    scanf("%f", &sample_rate);
+    scanf("%s", &temp);
+    
+    while(run) {
+        if(!is_number(&temp)) {
+            printf("Enter a sample rate: \n");
+            scanf("%s", &temp);
+        } else {
+            sample_rate = atoi(&temp);
+            run = 0;
+        }
+    }
+    
+    run = 1;
+    temp = '\n';
     
     printf("Enter the duration: \n");
-    scanf("%f", &duration);
+    scanf("%sc", &temp);
+    
+    while(run) {
+        if(!is_number(&temp)) {
+            printf("Enter a duration: \n");
+            scanf("%s", &temp);
+        } else {
+            duration = atoi(&temp);
+            run = 0;
+        }
+    }
     
     gensine(frequency, sample_rate, duration);
   

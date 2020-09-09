@@ -4,7 +4,7 @@
 
 // Returns 1 if it's invalid, 0 otherwise
 int check_validity(char* str) {
-    char* key_pad = "0123456789*#";
+    char* key_pad = "0123456789*#abcdABCD";
 
     for(int i = 0; i < strlen(str); i++) {
         for(int j = 0; j < strlen(key_pad); j++) {
