@@ -4,28 +4,28 @@
 
 void gensine(float frequency, float sampleRate, float duration) {
     float radians;
-    for(int i = 0; i < sampleRate*duration;) {
-        for(radians = 0; radians < 2*M_PI; radians += (2*M_PI/(sampleRate/frequency))) {
+    for(int i = 0; i < sampleRate*duration; ) {
+        for(radians = 0; radians < 2 * M_PI; radians += (2 * M_PI / (sampleRate / frequency))) {
             printf("%.6lf\n", sin(radians));
             i++;
         }
     }
 }
 
-void DTMF(float freq1, float freq2){
+void DTMF(float freq1, float freq2) {
     float radians1 = 0.0f;
     float radians2 = 0.0f;
     float duration = 0.5;
     float sampleRate = 8000;
-    for(int i = 0; i < sampleRate*duration;){
-        for(radians1 = 0, radians2 = 0; radians1 < 2*M_PI && radians2 < 2*M_PI; radians1 += (2*M_PI/(sampleRate/freq1)) ,radians2 += (2*M_PI/(sampleRate/freq2))){
-            printf("%.6lf\n", (sin(radians1)+sin(radians2)) / 2);
+    for(int i = 0; i < sampleRate*duration; ) {
+        for(radians1 = 0, radians2 = 0; radians1 < 2 * M_PI && radians2 < 2 * M_PI; radians1 += (2 * M_PI / (sampleRate / freq1)) , radians2 += (2 * M_PI / (sampleRate / freq2))) {
+            printf("%.6lf\n", (sin(radians1) + sin(radians2)) / 2);
             i++;
         }
     }
 }
 
-void phonePad(char ch) {
+void phone_pad(char ch) {
     switch (ch) {
         case '1':
             DTMF(697, 1209);
@@ -84,8 +84,8 @@ void phonePad(char ch) {
     }
 }
 
-void makeSilence(float sampleRate, float duration) {
-    for(int i = 0; i < sampleRate*duration; i++) {
+void make_silence(float sampleRate, float duration) {
+    for(int i = 0; i < sampleRate * duration; i++) {
         printf("%d\n", 0);
     }
 }
