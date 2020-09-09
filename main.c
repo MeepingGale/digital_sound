@@ -8,8 +8,7 @@ float duration;
 int main(int agrc, char * agrv[]) {
 
     printf("Enter a frequency: \n");
-    scanf("%f", &frequency);
-    
+    scanf("%f", &frequency); 
     printf("Enter a sample rate: \n");
     scanf("%f", &sample_rate);
     printf("Enter the duration: \n");
