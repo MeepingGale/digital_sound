@@ -6,9 +6,12 @@ float sample_rate;
 float duration;
 
 int main(int agrc, char * agrv[]) {
-    printf("Enter a frequency: \n");
-    scanf("%f", &frequency);
-    
+
+	printf("Enter a frequency: \n");
+    while(1){
+    if(scanf("%f", &frequency) == 1)
+    	break;
+    }
     printf("Enter a sample rate: \n");
     scanf("%f", &sample_rate);
     

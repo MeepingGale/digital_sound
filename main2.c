@@ -22,12 +22,12 @@ int main() {
     // Allocate size of 10
     char* str = (char*)malloc(10);
     
-    printf("Enter a character: \n");
+    printf("Enter a 10-digit Phone number: \n");
     scanf("%s", str);
 
     // Repeat until the user inputs 10 digits & checks validity
     while(strlen(str) != 10 || check_validity(str)) {
-        printf("Error! Enter 10 character(s): \n");
+        printf("Error! Enter a 10-digit Phone number: \n");
         scanf("%s", str);
     }
     
