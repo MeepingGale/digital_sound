@@ -1,28 +1,46 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <gensnd.h>
 
 void gensine(float frequency, float sampleRate, float duration) {
-    float radians;
-    for(int i = 0; i < sampleRate*duration; ) {
-        for(radians = 0; radians < 2 * M_PI; radians += (2 * M_PI / (sampleRate / frequency))) {
-            printf("%.6lf\n", sin(radians));
-            i++;
-        }
-    }
+    // float radians;
+    // for(int i = 0; i < sampleRate*duration; ) {
+    //     for(radians = 0; radians < 2 * M_PI; radians += (2 * M_PI / (sampleRate / frequency))) {
+    //         printf("%.6lf\n", sin(radians));
+    //         i++;
+    //     }
+    // }
+    int samplesAmount = duration * sampleRate;
+    for(int i = 0; i < samplesAmount; i++){
+       printf("%.6lf", sin(2.0 * M_PI * frequency * i / sampleRate));
+  }
+}
+
+sound *gensine2(float hertz, float sample_rate, float duration){
+    sound *gensine2 = (sound*)malloc(sizeof(sound));
+    gensine2->rate = sample_rate;
+    gensine2->length = sample_rate * duration;
+    int samplesAmount = duration * sampleRate;
+    for(int i = 0; i < samplesAmount; i++){
+        gensine2->samples[i] = sin(2.0 * M_PI * frequency * i / sampleRate);
+}
+    return gensine2;
 }
 
 void DTMF(float freq1, float freq2) {
-    float radians1 = 0.0f;
-    float radians2 = 0.0f;
-    float duration = 0.5;
-    float sampleRate = 8000;
-    for(int i = 0; i < sampleRate*duration; ) {
-        for(radians1 = 0, radians2 = 0; radians1 < 2 * M_PI && radians2 < 2 * M_PI; radians1 += (2 * M_PI / (sampleRate / freq1)) , radians2 += (2 * M_PI / (sampleRate / freq2))) {
-            printf("%.6lf\n", (sin(radians1) + sin(radians2)) / 2);
-            i++;
-        }
-    }
+    // float radians1 = 0.0f;
+    // float radians2 = 0.0f;
+    // float duration = 0.5;
+    // float sampleRate = 8000;
+    int samplesAmount = 0.5 * 8000;
+    for(int i = 0; i < samplesAmount; i++){
+    printf("%.6lf", (sin(2.0 * M_PI * freq1 * i / 8000) + sin(2.0 * M_PI * freq2 * i / 8000))/2.0);
+  }
+}
+
+sound *genDTMF2(char key, float sample_rate, float sduration){
+
 }
 
 void phone_pad(char ch) {
@@ -88,4 +106,18 @@ void make_silence(float sampleRate, float duration) {
     for(int i = 0; i < sampleRate * duration; i++) {
         printf("%d\n", 0);
     }
+}
+
+sound *genSilence(float sample_rate, float duration){
+    sound *silence = (sound*)malloc(sizeof(sound));
+    silence->rate = sample_rate;
+    silence->length = sample_rate * duration;
+    for(int i = 0; i < sampleRate * duration; i++) {
+        silence->samples[i] = 0;
+    }
+    return silence;
+}
+
+int outputSound( sound *s, FILE *f){
+
 }

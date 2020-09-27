@@ -38,7 +38,7 @@ int main(int agrc, char * agrv[]) {
             printf("Enter a frequency: \n");
             scanf("%s", &temp);
         } else {
-            frequency = atoi(&temp);
+            frequency = atof(&temp);
             run = 0;
         }
     }
@@ -56,7 +56,7 @@ int main(int agrc, char * agrv[]) {
             printf("Enter a sample rate: \n");
             scanf("%s", &temp);
         } else {
-            sample_rate = atoi(&temp);
+            sample_rate = atof(&temp);
             run = 0;
         }
     }
@@ -74,7 +74,7 @@ int main(int agrc, char * agrv[]) {
             printf("Enter a duration: \n");
             scanf("%s", &temp);
         } else {
-            duration = atoi(&temp);
+            duration = atof(&temp);
             run = 0;
         }
     }
