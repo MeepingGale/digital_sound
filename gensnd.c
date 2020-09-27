@@ -40,7 +40,7 @@ void DTMF(float freq1, float freq2) {
   }
 }
 
-sound *genDTMF2(char key, float sample_rate, float sduration){
+sound *genDTMF2(char key, float sample_rate, float duration){
 
 }
 
