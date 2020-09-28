@@ -1,4 +1,4 @@
-all: main main2
+all: main main2 main1b
 
 main: main.c
 	gcc -Wall -Werror -ggdb3  main.c -o gensine
@@ -6,5 +6,8 @@ main: main.c
 main2: main2.c
 	gcc -Wall -Werror -ggdb3 main2.c -o gendial
 
+main1b: main1b.c
+	gcc -Wall -Werror -ggdb3 main1b.c -o main1b
+
 clean:
-	rm -f main main2 *~
+	rm -f main main2 main1b *~
