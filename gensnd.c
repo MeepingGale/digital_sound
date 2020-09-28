@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
-#include <gensnd.h>
+#include "gensnd.h"
 
 void gensine(float frequency, float sampleRate, float duration) {
     // float radians;
@@ -13,7 +13,7 @@ void gensine(float frequency, float sampleRate, float duration) {
     // }
     int samplesAmount = duration * sampleRate;
     for(int i = 0; i < samplesAmount; i++){
-       printf("%.6lf", sin(2.0 * M_PI * frequency * i / sampleRate));
+       printf("%.6lf\n", sin(2.0 * M_PI * frequency * i / sampleRate));
   }
 }
 
@@ -22,9 +22,9 @@ sound *gensine2(float hertz, float sample_rate, float duration){
     gensine2->rate = sample_rate;
     gensine2->length = sample_rate * duration;
     gensine2->samples = (float *)malloc(sizeof(float)*sample_rate*duration);
-    int samplesAmount = duration * sampleRate;
+    int samplesAmount = duration * sample_rate;
     for(int i = 0; i < samplesAmount; i++){
-        gensine2->samples[i] = sin(2.0 * M_PI * frequency * i / sampleRate);
+        gensine2->samples[i] = sin(2.0 * M_PI * hertz * i / sample_rate);
 }
     return gensine2;
 }
@@ -36,12 +36,92 @@ void DTMF(float freq1, float freq2) {
     // float sampleRate = 8000;
     int samplesAmount = 0.5 * 8000;
     for(int i = 0; i < samplesAmount; i++){
-    printf("%.6lf", (sin(2.0 * M_PI * freq1 * i / 8000) + sin(2.0 * M_PI * freq2 * i / 8000))/2.0);
+    printf("%.6lf\n", (sin(2.0 * M_PI * freq1 * i / 8000) + sin(2.0 * M_PI * freq2 * i / 8000))/2.0);
   }
 }
 
 sound *genDTMF2(char key, float sample_rate, float duration){
-
+    float freq1, freq2 = 0;
+    switch (ch) {
+        case '1':
+            freq1 = 697;
+            freq2 = 1209;
+            break;
+        case '2':
+            freq1 = 697;
+            freq2 = 1336;
+            break;
+        case '3':
+            freq1 = 697;
+            freq2 = 1477;
+            break;
+        case '4':
+            freq1 = 770;
+            freq2 = 1209;
+            break;
+        case '5':
+            freq1 = 770;
+            freq2 = 1336;
+            break;
+        case '6':
+            freq1 = 770;
+            freq2 = 1477;
+            break;
+        case '7':
+            freq1 = 852;
+            freq2 = 1209;
+            break;
+        case '8':
+            freq1 = 852;
+            freq2 = 1336;
+            break;
+        case '9':
+            freq1 = 852;
+            freq2 = 1477;
+            break;
+        case 'a':
+        case 'A':
+            freq1 = 697;
+            freq2 = 1633;
+            break;
+        case 'b':
+        case 'B':
+            freq1 = 770;
+            freq2 = 1633;
+            break;
+        case 'c':
+        case 'C':
+            freq1 = 852; 
+            freq2 = 1633;
+            break;
+        case 'd':
+        case 'D':
+            freq1 = 941;
+            freq2 = 1633;
+            break;
+        case '*':
+            freq1 = 941
+            freq2 = 1209;
+            break;
+        case '0':
+            freq1 = 941; 
+            freq2 = 1336;
+            break;
+        case '#':
+            freq1 = 941; 
+            freq2 = 1477;
+            break;
+        default:
+            printf("Not in the phone pad\n");
+    }
+    sound *genDTMF2 = (sound*)malloc(sizeof(sound));
+    genDTMF2->rate = sample_rate;
+    genDTMF2->length = sample_rate * duration;
+    genDTMF2->samples = (float *)malloc(sizeof(float)*sample_rate*duration);
+    int samplesAmount = duration * sample_rate;
+    for(int i = 0; i < samplesAmount; i++){
+    genDTMF2->samples[i] = (sin(2.0 * M_PI * freq1 * i / sample_rate) + sin(2.0 * M_PI * freq2 * i / sample_rate))/2.0;
+  }
 }
 
 void phone_pad(char ch) {
@@ -114,12 +194,12 @@ sound *genSilence(float sample_rate, float duration){
     silence->rate = sample_rate;
     silence->length = sample_rate * duration;
     silence->samples = (float*)malloc(sizeof(float)*sample_rate * duration);
-    for(int i = 0; i < sampleRate * duration; i++) {
+    for(int i = 0; i < sample_rate * duration; i++) {
         silence->samples[i] = 0;
     }
     return silence;
 }
 
-int outputSound( sound *s, FILE *f){
+int outputSound(sound *s, FILE *f){
 
 }
