@@ -100,7 +100,7 @@ sound *genDTMF2(char key, float sample_rate, float duration){
             freq2 = 1633;
             break;
         case '*':
-            freq1 = 941
+            freq1 = 941;
             freq2 = 1209;
             break;
         case '0':
