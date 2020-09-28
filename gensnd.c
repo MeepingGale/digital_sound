@@ -40,8 +40,89 @@ void DTMF(float freq1, float freq2) {
     }
 }
 
-sound *genDTMF2(char key, float sample_rate, float duration) {
-    return NULL;
+sound *genDTMF2(char key, float sample_rate, float duration){
+    float freq1, freq2 = 0;
+    switch (ch) {
+        case '1':
+            freq1 = 697;
+            freq2 = 1209;
+            break;
+        case '2':
+            freq1 = 697;
+            freq2 = 1336;
+            break;
+        case '3':
+            freq1 = 697;
+            freq2 = 1477;
+            break;
+        case '4':
+            freq1 = 770;
+            freq2 = 1209;
+            break;
+        case '5':
+            freq1 = 770;
+            freq2 = 1336;
+            break;
+        case '6':
+            freq1 = 770;
+            freq2 = 1477;
+            break;
+        case '7':
+            freq1 = 852;
+            freq2 = 1209;
+            break;
+        case '8':
+            freq1 = 852;
+            freq2 = 1336;
+            break;
+        case '9':
+            freq1 = 852;
+            freq2 = 1477;
+            break;
+        case 'a':
+        case 'A':
+            freq1 = 697;
+            freq2 = 1633;
+            break;
+        case 'b':
+        case 'B':
+            freq1 = 770;
+            freq2 = 1633;
+            break;
+        case 'c':
+        case 'C':
+            freq1 = 852; 
+            freq2 = 1633;
+            break;
+        case 'd':
+        case 'D':
+            freq1 = 941;
+            freq2 = 1633;
+            break;
+        case '*':
+            freq1 = 941
+            freq2 = 1209;
+            break;
+        case '0':
+            freq1 = 941; 
+            freq2 = 1336;
+            break;
+        case '#':
+            freq1 = 941; 
+            freq2 = 1477;
+            break;
+        default:
+            printf("Not in the phone pad\n");
+    }
+    sound *genDTMF2 = (sound*)malloc(sizeof(sound));
+    genDTMF2->rate = sample_rate;
+    genDTMF2->length = sample_rate * duration;
+    genDTMF2->samples = (float *)malloc(sizeof(float)*sample_rate*duration);
+    int samplesAmount = duration * sample_rate;
+    for(int i = 0; i < samplesAmount; i++){
+    genDTMF2->samples[i] = (sin(2.0 * M_PI * freq1 * i / sample_rate) + sin(2.0 * M_PI * freq2 * i / sample_rate))/2.0;
+  }
+  return genDTMF2;
 }
 
 void phone_pad(char ch) {
