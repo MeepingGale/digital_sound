@@ -14,7 +14,7 @@ void make_silence(float sampleRate, float duration);
 
 sound *gensine2( float hertz, float sample_rate, float duration);
 
-sound *genDTMF2(char key, float sample_rate, floatduration);
+sound *genDTMF2(char key, float sample_rate, float duration);
 
 sound *genSilence(float sample_rate, float duration);
 
