@@ -21,7 +21,7 @@ sound *gensine2(float hertz, float sample_rate, float duration){
     sound *gensine2 = (sound*)malloc(sizeof(sound));
     gensine2->rate = sample_rate;
     gensine2->length = sample_rate * duration;
-    gensine2->samples[i] = (float*)malloc(sizeof(float));
+    gensine2->samples = (float *)malloc(sizeof(float)*sample_rate*duration);
     int samplesAmount = duration * sampleRate;
     for(int i = 0; i < samplesAmount; i++){
         gensine2->samples[i] = sin(2.0 * M_PI * frequency * i / sampleRate);
@@ -113,7 +113,7 @@ sound *genSilence(float sample_rate, float duration){
     sound *silence = (sound*)malloc(sizeof(sound));
     silence->rate = sample_rate;
     silence->length = sample_rate * duration;
-    silence->samples[i] = (float*)malloc(sizeof(float));
+    silence->samples = (float*)malloc(sizeof(float)*sample_rate * duration);
     for(int i = 0; i < sampleRate * duration; i++) {
         silence->samples[i] = 0;
     }
