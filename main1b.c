@@ -53,6 +53,7 @@ int main(int argc, char * argv[]) {
                 free(temp->samples);
                 free(temp);
             }
+            free(silence);
         } else if(argc == 3) {
             if(!is_number(argv[1])) {
                 printf("Invalid parameter!");
@@ -71,9 +72,9 @@ int main(int argc, char * argv[]) {
                     outputSound(silence, file);
                 free(temp->samples);
                 free(temp);
-                free(silence);
-                fclose(file);
             }
+            fclose(file);
+            free(silence);
         }
     }
     return 0;
