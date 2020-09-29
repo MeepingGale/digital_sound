@@ -55,7 +55,6 @@ int main(int argc, char * argv[]) {
             }
         } else if(argc == 3) {
             if(!is_number(argv[1])) {
-                printf("%s\n", argv[1]);
                 printf("Invalid parameter!");
                 printf("Usage: ./partb <phone_number> | ./partb <phone_number> <output_file.wav>\n");
                 return 1;

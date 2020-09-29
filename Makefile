@@ -1,4 +1,5 @@
-all: main main2 main1b
+parta: main main2
+partb: main1b
 
 main: main.c
 	gcc -Wall -Werror -ggdb3  main.c -o gensine
