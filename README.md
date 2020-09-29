@@ -5,10 +5,14 @@ Sound is simply a wave transmitted through the atmospherethrough changing pressu
 
 ### Usage
 
-Clone the repository. There are **2** executables, gensine and gendial. 
+Clone the repository. There are **3** executables, gensine and gendial. 
 
 ```sh
-$ make
+$ make parta
+```
+
+```sh
+$ make partb
 ```
 
 For gensine,
@@ -27,6 +31,21 @@ $ ./gendial
 
 The program then will ask you to enter a 10-digit number.
 
+For main1b,
+
+```sh
+$ ./main1b <phone_pad_symbols> 
+```
+
+It will print the values on the console.
+
+**OR**
+
+```sh
+$ ./main1b <phone_pad_symbols> <output_file_name>
+```
+
+It will print the values to the output file.
 
 ### DTMF
 
