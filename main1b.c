@@ -4,7 +4,7 @@
 
 // Method to check if "str" is fully numeric
 int is_number(char* str) {
-    char* nums = "0123456789";
+    char* nums = "0123456789*#abcdABCD";
     int count = 0;
 
     // Loops thru the array to check if str is fully numeric
