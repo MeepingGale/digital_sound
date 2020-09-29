@@ -42,7 +42,7 @@ void DTMF(float freq1, float freq2) {
 
 sound *genDTMF2(char key, float sample_rate, float duration){
     float freq1, freq2 = 0;
-    switch (ch) {
+    switch (key) {
         case '1':
             freq1 = 697;
             freq2 = 1209;
@@ -134,7 +134,7 @@ void phone_pad(char ch) {
             DTMF(697, 1336);
             break;
         case '3':
-            DTMF(697, 1477);s
+            DTMF(697, 1477);
             break;
         case '4':
             DTMF(770, 1209);
