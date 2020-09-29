@@ -4,13 +4,6 @@
 #include "gensnd.h"
 
 void gensine(float frequency, float sampleRate, float duration) {
-    // float radians;
-    // for(int i = 0; i < sampleRate*duration; ) {
-    //     for(radians = 0; radians < 2 * M_PI; radians += (2 * M_PI / (sampleRate / frequency))) {
-    //         printf("%.6lf\n", sin(radians));
-    //         i++;
-    //     }
-    // }
     int samplesAmount = duration * sampleRate;
     for(int i = 0; i < samplesAmount; i++){
        printf("%.6lf\n", sin(2.0 * M_PI * frequency * i / sampleRate));
@@ -30,10 +23,6 @@ sound *gensine2(float hertz, float sample_rate, float duration) {
 }
 
 void DTMF(float freq1, float freq2) {
-    // float radians1 = 0.0f;
-    // float radians2 = 0.0f;
-    // float duration = 0.5;
-    // float sampleRate = 8000;
     int samplesAmount = 0.5 * 8000;
     for(int i = 0; i < samplesAmount; i++) {
         printf("%.6lf\n", (sin(2.0 * M_PI * freq1 * i / 8000) + sin(2.0 * M_PI * freq2 * i / 8000))/2.0);
