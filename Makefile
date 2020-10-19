@@ -1,14 +1,15 @@
 parta: main main2
 partb: main1b
+all: main main2 main1b
 
-main: main.c
-	gcc -Wall -Werror -ggdb3  main.c -o gensine
+main: gensnd.h
+	gcc main.c -o gensine
 
-main2: main2.c
-	gcc -Wall -Werror -ggdb3 main2.c -o gendial
+main2: gensnd.h
+	gcc main2.c -o gendial
 
-main1b: main1b.c
-	gcc -Wall -Werror -ggdb3 main1b.c -o partb
+main1b.o: gensnd.h
+	gcc main1b.c -o dtmf
 
 clean:
 	rm -f main main2 main1b *~
