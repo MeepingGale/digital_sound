@@ -1,6 +1,6 @@
 parta: main main2
 partb: main1b
-all: main main2 main1b
+all: parta partb
 
 main: gensnd.h gensnd.c
 	gcc main.c -o gensine
@@ -12,4 +12,4 @@ main1b.o: gensnd.h gensnd.c
 	gcc main1b.c -o dtmf
 
 clean:
-	rm -f main main2 main1b *~
+	rm -f gensine gendial dtmf *~

@@ -3,12 +3,12 @@
 #include <math.h>
 #include "gensnd.h"
 
-void gensine(float frequency, float sampleRate, float duration) {
-    int samplesAmount = duration * sampleRate;
-    for(int i = 0; i < samplesAmount; i++){
-       printf("%.6lf\n", sin(2.0 * M_PI * frequency * i / sampleRate));
-  }
-}
+// void gensine(float frequency, float sampleRate, float duration) {
+//     int samplesAmount = duration * sampleRate;
+//     for(int i = 0; i < samplesAmount; i++){
+//        printf("%.6lf\n", sin(2.0 * M_PI * frequency * i / sampleRate));
+//   }
+// }
 
 sound *gensine2(float hertz, float sample_rate, float duration) {
     sound *gensine2 = (sound*)malloc(sizeof(sound));
@@ -22,12 +22,12 @@ sound *gensine2(float hertz, float sample_rate, float duration) {
     return gensine2;
 }
 
-void DTMF(float freq1, float freq2) {
-    int samplesAmount = 0.5 * 8000;
-    for(int i = 0; i < samplesAmount; i++) {
-        printf("%.6lf\n", (sin(2.0 * M_PI * freq1 * i / 8000) + sin(2.0 * M_PI * freq2 * i / 8000))/2.0);
-    }
-}
+// void DTMF(float freq1, float freq2) {
+//     int samplesAmount = 0.5 * 8000;
+//     for(int i = 0; i < samplesAmount; i++) {
+//         printf("%.6lf\n", (sin(2.0 * M_PI * freq1 * i / 8000) + sin(2.0 * M_PI * freq2 * i / 8000))/2.0);
+//     }
+// }
 
 sound *genDTMF2(char key, float sample_rate, float duration){
     float freq1, freq2 = 0;
@@ -80,7 +80,7 @@ sound *genDTMF2(char key, float sample_rate, float duration){
             break;
         case 'c':
         case 'C':
-            freq1 = 852; 
+            freq1 = 852;
             freq2 = 1633;
             break;
         case 'd':
@@ -93,11 +93,11 @@ sound *genDTMF2(char key, float sample_rate, float duration){
             freq2 = 1209;
             break;
         case '0':
-            freq1 = 941; 
+            freq1 = 941;
             freq2 = 1336;
             break;
         case '#':
-            freq1 = 941; 
+            freq1 = 941;
             freq2 = 1477;
             break;
         default:
@@ -114,70 +114,70 @@ sound *genDTMF2(char key, float sample_rate, float duration){
   return genDTMF2;
 }
 
-void phone_pad(char ch) {
-    switch (ch) {
-        case '1':
-            DTMF(697, 1209);
-            break;
-        case '2':
-            DTMF(697, 1336);
-            break;
-        case '3':
-            DTMF(697, 1477);
-            break;
-        case '4':
-            DTMF(770, 1209);
-            break;
-        case '5':
-            DTMF(770, 1336);
-            break;
-        case '6':
-            DTMF(770, 1477);
-            break;
-        case '7':
-            DTMF(852, 1209);
-            break;
-        case '8':
-            DTMF(852, 1336);
-            break;
-        case '9':
-            DTMF(852, 1477);
-            break;
-        case 'a':
-        case 'A':
-            DTMF(697, 1633);
-            break;
-        case 'b':
-        case 'B':
-            DTMF(770, 1633);
-            break;
-        case 'c':
-        case 'C':
-            DTMF(852, 1633);
-            break;
-        case 'd':
-        case 'D':
-            DTMF(941, 1633);
-            break;
-        case '*':
-            DTMF(941, 1209);
-            break;
-        case '0':
-            DTMF(941, 1336);
-            break;
-        case '#':
-            DTMF(941, 1477);
-            break;
-        default:
-            printf("Not in the phone pad\n");
-    }
-}
-
-void make_silence(float sampleRate, float duration) {
-    for(int i = 0; i < sampleRate * duration; i++) {
-        printf("%d\n", 0);
-    }
-}
+// void phone_pad(char ch) {
+//     switch (ch) {
+//         case '1':
+//             DTMF(697, 1209);
+//             break;
+//         case '2':
+//             DTMF(697, 1336);
+//             break;
+//         case '3':
+//             DTMF(697, 1477);
+//             break;
+//         case '4':
+//             DTMF(770, 1209);
+//             break;
+//         case '5':
+//             DTMF(770, 1336);
+//             break;
+//         case '6':
+//             DTMF(770, 1477);
+//             break;
+//         case '7':
+//             DTMF(852, 1209);
+//             break;
+//         case '8':
+//             DTMF(852, 1336);
+//             break;
+//         case '9':
+//             DTMF(852, 1477);
+//             break;
+//         case 'a':
+//         case 'A':
+//             DTMF(697, 1633);
+//             break;
+//         case 'b':
+//         case 'B':
+//             DTMF(770, 1633);
+//             break;
+//         case 'c':
+//         case 'C':
+//             DTMF(852, 1633);
+//             break;
+//         case 'd':
+//         case 'D':
+//             DTMF(941, 1633);
+//             break;
+//         case '*':
+//             DTMF(941, 1209);
+//             break;
+//         case '0':
+//             DTMF(941, 1336);
+//             break;
+//         case '#':
+//             DTMF(941, 1477);
+//             break;
+//         default:
+//             printf("Not in the phone pad\n");
+//     }
+// }
+//
+// void make_silence(float sampleRate, float duration) {
+//     for(int i = 0; i < sampleRate * duration; i++) {
+//         printf("%d\n", 0);
+//     }
+// }
 
 sound *genSilence(float sample_rate, float duration){
     sound *silence = (sound*)malloc(sizeof(sound));
@@ -190,14 +190,47 @@ sound *genSilence(float sample_rate, float duration){
     return silence;
 }
 
-int outputSound(sound *s, FILE *f) {
-    
-    // File doesn't exist
-    if(f == NULL)
-        return 1;
-    
-    for(int i=0; i<s->length;i++)
-        fprintf(f, "%f\n", s->samples[i]);
-    
-    return 0;
+// int outputSound(sound *s, FILE *f) {
+//
+//     // File doesn't exist
+//     if(f == NULL)
+//         return 1;
+//
+//     for(int i=0; i<s->length;i++)
+//         fprintf(f, "%f\n", s->samples[i]);
+//
+//     return 0;
+// }
+
+sound * genSquare( float hertz, float sample_rate, float duration){
+  sound *square = (sound*)malloc(sizeof(sound));
+  silence->rate = sample_rate;
+  silence->length = sample_rate * duration;
+  silence->samples = (float*)malloc(sizeof(float)*sample_rate * duration);
+  for(int i = 0; i < sample_rate  * duration; i++) {
+
+  }
+  return square;
+}
+
+sound * genTriangle( float hertz, float sample_rate, float duration){
+  sound *triangle = (sound*)malloc(sizeof(sound));
+  silence->rate = sample_rate;
+  silence->length = sample_rate * duration;
+  silence->samples = (float*)malloc(sizeof(float)*sample_rate * duration);
+  for(int i = 0; i < sample_rate  * duration; i++) {
+
+  }
+  return triangle;
+}
+
+sound * genSawtooth( float hertz, float sample_rate, float duration){
+  sound *sawTooth = (sound*)malloc(sizeof(sound));
+  silence->rate = sample_rate;
+  silence->length = sample_rate * duration;
+  silence->samples = (float*)malloc(sizeof(float)*sample_rate * duration);
+  for(int i = 0; i < sample_rate  * duration; i++) {
+
+  }
+  return sawTooth;
 }
