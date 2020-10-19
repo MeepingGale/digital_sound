@@ -1,9 +1,3 @@
-typedef struct sound_t {
-    float* samples;
-    int length;
-    float rate;
-} sound;
-
 void gensine(float frequency, float sampleRate, float duration);
 
 void DTMF(float freq1, float freq2);
