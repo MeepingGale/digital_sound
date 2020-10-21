@@ -202,7 +202,7 @@ sound *genSilence(float sample_rate, float duration){
 //     return 0;
 // }
 
-sound * genSquare( float hertz, float sample_rate, float duration){
+sound *genSquare( float hertz, float sample_rate, float duration){
   sound *square = (sound*)malloc(sizeof(sound));
   square->rate = sample_rate;
   square->length = sample_rate * duration;
@@ -213,7 +213,7 @@ sound * genSquare( float hertz, float sample_rate, float duration){
   return square;
 }
 
-sound * genTriangle( float hertz, float sample_rate, float duration){
+sound *genTriangle( float hertz, float sample_rate, float duration){
   sound *triangle = (sound*)malloc(sizeof(sound));
   triangle->rate = sample_rate;
   triangle->length = sample_rate * duration;
@@ -224,7 +224,7 @@ sound * genTriangle( float hertz, float sample_rate, float duration){
   return triangle;
 }
 
-sound * genSawtooth( float hertz, float sample_rate, float duration){
+sound *genSawtooth( float hertz, float sample_rate, float duration){
   sound *sawTooth = (sound*)malloc(sizeof(sound));
   sawTooth->rate = sample_rate;
   sawTooth->length = sample_rate * duration;
