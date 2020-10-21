@@ -1,15 +1,30 @@
-parta: main main2
-partb: main1b
 all: parta partb
 
-main: gensnd.h gensnd.c
-	gcc main.c -o gensine
+parta: main main2
 
-main2: gensnd.h gensnd.c
-	gcc main2.c -o gendial
+partb: main1b
 
-main1b.o: gensnd.h gensnd.c
-	gcc main1b.c -o dtmf
+
+main: main.o gensnd.o
+	gcc -o gensine main.o gensnd.o
+
+main.o: main.c gensnd.h
+	gcc -c main.c
+
+main2: main2.o gensnd.o
+	gcc -o gendial main2.o gensnd.o
+
+main2.o: main2.c gensnd.h
+	gcc -c main2.c
+
+main1b: main1b.o gensnd.o
+	gcc -o dtmf main1b.o gensnd.o
+
+main1b.o: gensnd.h main1b.c
+	gcc -c main1b.c
+
+gensnd.o: gensnd.h gensnd.c
+	gcc -c gensnd.c
 
 clean:
-	rm -f gensine gendial dtmf *~
+	rm -f gensine gendial dtmf *.o

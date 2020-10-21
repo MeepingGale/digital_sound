@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include "gensnd.c"
+#include <stdlib.h>
+#include "gensnd.h"
 
 float frequency;
 float sample_rate;
@@ -18,7 +19,7 @@ int is_number(char* str) {
                 count += 1;
         }
     }
-    
+
     // Fully numeric
     if(strlen(str) == count)
         return 1;
@@ -28,10 +29,10 @@ int is_number(char* str) {
 int main(int agrc, char * agrv[]) {
     char temp;
     int run = 1;
-    
+
 	printf("Enter a frequency: \n");
     scanf("%s", &temp);
-    
+
     // Run infinitely until the user inputs a float val
     while(run) {
         if(!is_number(&temp)) {
@@ -42,14 +43,14 @@ int main(int agrc, char * agrv[]) {
             run = 0;
         }
     }
-    
+
     // Reset
     run = 1;
     temp = '\n';
-    
+
     printf("Enter a sample rate: \n");
     scanf("%s", &temp);
-    
+
     // Run infinitely until the user inputs a float val
     while(run) {
         if(!is_number(&temp)) {
@@ -60,14 +61,14 @@ int main(int agrc, char * agrv[]) {
             run = 0;
         }
     }
-    
+
     // Reset
     run = 1;
     temp = '\n';
-    
+
     printf("Enter the duration: \n");
     scanf("%sc", &temp);
-    
+
     // Run infinitely until the user inputs a float val
     while(run) {
         if(!is_number(&temp)) {
@@ -78,8 +79,8 @@ int main(int agrc, char * agrv[]) {
             run = 0;
         }
     }
-    
+
     gensine(frequency, sample_rate, duration);
-  
+
     return 0;
 }

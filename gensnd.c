@@ -204,33 +204,33 @@ sound *genSilence(float sample_rate, float duration){
 
 sound * genSquare( float hertz, float sample_rate, float duration){
   sound *square = (sound*)malloc(sizeof(sound));
-  silence->rate = sample_rate;
-  silence->length = sample_rate * duration;
-  silence->samples = (float*)malloc(sizeof(float)*sample_rate * duration);
+  square->rate = sample_rate;
+  square->length = sample_rate * duration;
+  square->samples = (float*)malloc(sizeof(float)*sample_rate * duration);
   for(int i = 0; i < sample_rate  * duration; i++) {
-
+    square->samples[i] = 2*(2*floor(hertz * i / sample_rate)-floor(2* hertz * i / sample_rate))+1;
   }
   return square;
 }
 
 sound * genTriangle( float hertz, float sample_rate, float duration){
   sound *triangle = (sound*)malloc(sizeof(sound));
-  silence->rate = sample_rate;
-  silence->length = sample_rate * duration;
-  silence->samples = (float*)malloc(sizeof(float)*sample_rate * duration);
+  triangle->rate = sample_rate;
+  triangle->length = sample_rate * duration;
+  triangle->samples = (float*)malloc(sizeof(float)*sample_rate * duration);
   for(int i = 0; i < sample_rate  * duration; i++) {
-
+    triangle->samples[i] = 2*(fabs(2*((i *hertz/sample_rate)-floor(0.5 + (i *hertz/sample_rate)))))-1;
   }
   return triangle;
 }
 
 sound * genSawtooth( float hertz, float sample_rate, float duration){
   sound *sawTooth = (sound*)malloc(sizeof(sound));
-  silence->rate = sample_rate;
-  silence->length = sample_rate * duration;
-  silence->samples = (float*)malloc(sizeof(float)*sample_rate * duration);
+  sawTooth->rate = sample_rate;
+  sawTooth->length = sample_rate * duration;
+  sawTooth->samples = (float*)malloc(sizeof(float)*sample_rate * duration);
   for(int i = 0; i < sample_rate  * duration; i++) {
-
+    sawTooth->samples[i] = 2*((i *hertz/sample_rate)-floor(0.5 + (i *hertz/sample_rate)));
   }
   return sawTooth;
 }

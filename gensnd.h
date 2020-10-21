@@ -1,4 +1,8 @@
+#ifndef GENSND_H
+#define GENSND_H
+
 #include "sound.h"
+
 // void gensine(float frequency, float sampleRate, float duration);
 //
 // void DTMF(float freq1, float freq2);
@@ -20,3 +24,5 @@ sound * genSquare( float hertz, float sample_rate, float duration);
 sound * genTriangle( float hertz, float sample_rate, float duration);
 
 sound * genSawtooth( float hertz, float sample_rate, float duration);
+
+#endif

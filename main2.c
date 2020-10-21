@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include "gensnd.c"
+#include <stdlib.h>
+#include "gensnd.h"
 
 // Returns 1 if it's invalid, 0 otherwise
 int check_validity(char* str) {
@@ -14,14 +15,14 @@ int check_validity(char* str) {
                 return 1;
         }
     }
-            
+
     return 0;
 }
 
 int main() {
     // Allocate size of 10
     char* str = (char*)malloc(10);
-    
+
     printf("Enter a 10-digit Phone number: \n");
     scanf("%s", str);
 
@@ -30,15 +31,14 @@ int main() {
         printf("Error! Enter a 10-digit Phone number: \n");
         scanf("%s", str);
     }
-    
-    // Loop 
+
+    // Loop
     for(int i = 0; i < strlen(str); i++) {
         phone_pad(str[i]);
         if(i + 1 != strlen(str))
             make_silence(8000, 0.25);
     }
-    
+
     free(str);
 	return 0;
 }
-
