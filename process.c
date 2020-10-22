@@ -54,7 +54,7 @@ sound* filter(sound *s, float fir[], int c){
   for(int i = 0; i < s->length; i++) {
     filter->samples[i] = 0;
   }
-  for(int i = 0; i < 9; i++){
+  for(int i = 0; i < s->length; i++){
 		for (int j = 0; j < c; j++){
       if(i-j >= 0){
 					filter->samples[i] += s[i-j]*fir[j];
