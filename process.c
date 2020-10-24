@@ -64,7 +64,28 @@ sound* filter(sound *s, float fir[], int c){
 }
 
 sound* reverb(sound *s, float delay, float attenuation){
-
+  if(attenuation >= 1 || attenuation <= 0){
+    return NULL;
+  }
+  if(delay <= 0 || delay >= 0.1){
+    return NULL;
+  }
+  if (s == NULL) {
+    return NULL;
+  }
+  int firArraySize = s->rate * delay;
+  float fir[firArraySize];
+  for(int i = 0; i < firArraySize; i++){
+    if (i == 0) {
+      fir[i] == 1;
+    }
+    if(i == firArraySize - 1){
+      fir[i] == attenuation;
+    }
+    fir[i] = 0;
+  }
+  sound *reverb = filter(s, fir[], firArraySize);
+  return reverb;
 }
 
 sound* echo(sound *s, float delay, float attenuation){
