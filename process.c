@@ -77,10 +77,10 @@ sound* reverb(sound *s, float delay, float attenuation){
   float fir[firArraySize];
   for(int i = 0; i < firArraySize; i++){
     if (i == 0) {
-      fir[i] == 1;
+      fir[i] = 1;
     }
     if(i == firArraySize - 1){
-      fir[i] == attenuation;
+      fir[i] = attenuation;
     }
     fir[i] = 0;
   }
