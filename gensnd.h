@@ -3,6 +3,7 @@
 
 #include "sound.h"
 #include "iosnd.h"
+#include "math.h"
 
 // void gensine(float frequency, float sampleRate, float duration);
 //
