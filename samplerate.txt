@@ -1,0 +1,7 @@
+SAMPLERATE
+32000
+
+WAVE
+w1
+saw
+0.02 0.1
