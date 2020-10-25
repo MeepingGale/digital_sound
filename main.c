@@ -80,7 +80,7 @@ int main(int agrc, char * agrv[]) {
         }
     }
 
-    gensine(frequency, sample_rate, duration);
+    //gensine(frequency, sample_rate, duration);
 
     return 0;
 }
