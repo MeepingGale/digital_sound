@@ -22,10 +22,10 @@ main2.o: main2.c gensnd.h
 main1b: main1b.o gensnd.o iosnd.o
 	gcc -o dtmf main1b.o gensnd.o iosnd.o
 
-playsong: playsong.o gensnd.o iosnd.o
+playsong: playsong.o gensnd.o iosnd.o process.o
 	gcc -o playsong playsong.o gensnd.o iosnd.o
 
-playsong.o: gensnd.h playsong.c
+playsong.o: gensnd.h playsong.c 
 	gcc -c playsong.c
 
 main1b.o: gensnd.h main1b.c
@@ -36,6 +36,9 @@ gensnd.o: gensnd.h gensnd.c iosnd.h iosnd.c
 
 iosnd.o: iosnd.h iosnd.c
 	gcc -c iosnd.c
+
+process.o: process.h process.c
+	gcc -c process.c
 
 clean:
 	rm -f gensine gendial dtmf playsong *.o
