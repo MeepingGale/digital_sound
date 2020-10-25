@@ -110,4 +110,5 @@ sound* echo(sound *s, float delay, float attenuation){
     for(int i = 0; i < s->length; i++){
         
     }
+    return echo;
 }
