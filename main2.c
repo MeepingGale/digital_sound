@@ -34,9 +34,9 @@ int main() {
 
     // Loop
     for(int i = 0; i < strlen(str); i++) {
-        phone_pad(str[i]);
-        if(i + 1 != strlen(str))
-            make_silence(8000, 0.25);
+        //phone_pad(str[i]);
+        //if(i + 1 != strlen(str))
+            //make_silence(8000, 0.25);
     }
 
     free(str);

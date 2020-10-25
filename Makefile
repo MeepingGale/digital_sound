@@ -17,14 +17,14 @@ main2: main2.o gensnd.o
 main2.o: main2.c gensnd.h
 	gcc -c main2.c
 
-main1b: main1b.o gensnd.o
+main1b: main1b.o gensnd.o 
 	gcc -o dtmf main1b.o gensnd.o
 
 main1b.o: gensnd.h main1b.c
 	gcc -c main1b.c
 
 gensnd.o: gensnd.h gensnd.c
-	gcc -c gensnd.c
+	gcc -c gensnd.c 
 
 clean:
 	rm -f gensine gendial dtmf *.o

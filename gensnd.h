@@ -2,6 +2,7 @@
 #define GENSND_H
 
 #include "sound.h"
+#include "iosnd.h"
 
 // void gensine(float frequency, float sampleRate, float duration);
 //
