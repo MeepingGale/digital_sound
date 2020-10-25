@@ -55,10 +55,10 @@ sound* filter(sound *s, float fir[], int c){
     filter->samples[i] = 0;
   }
   for(int i = 0; i < s->length; i++){
-		for (int j = 0; j < c; j++){
-      if(i-j >= 0){
-					filter->samples[i] += s[i-j]*fir[j];
-			}
+    for (int j = 0; j < c; j++){
+        if(i-j >= 0){
+        filter->samples[i] += s[i-j]*fir[j];
+        }
     }
   }
 }
@@ -74,20 +74,40 @@ sound* reverb(sound *s, float delay, float attenuation){
     return NULL;
   }
   int firArraySize = s->rate * delay;
-  float fir[firArraySize];
+  float *fir = (float*)malloc(sizeof(float)*firArraySize);
   for(int i = 0; i < firArraySize; i++){
     if (i == 0) {
       fir[i] = 1;
     }
-    if(i == firArraySize - 1){
+    else if(i == firArraySize - 1){
       fir[i] = attenuation;
     }
-    fir[i] = 0;
+    else if(i != 0 || i != firArraySize - 1){
+      fir[i] = 0;
+    }
   }
   sound *reverb = filter(s, fir[], firArraySize);
   return reverb;
 }
 
 sound* echo(sound *s, float delay, float attenuation){
-
+    if(attenuation >= 1 || attenuation <= 0){
+      return NULL;
+    }
+    if(delay < 0.1 || delay > 1){
+      return NULL;
+    }
+    if (s == NULL) {
+      return NULL;
+    }
+    sound *echo = (sound*)malloc(sizeof(sound));
+    echo->rate = s->rate;
+    echo->length = s->length;
+    echo->samples = (float *)malloc(sizeof(float)*s->length);
+    for(int i = 0; i < s->length; i++) {
+      filter->samples[i] = 0;
+    }
+    for(int i = 0; i < s->length; i++){
+        
+    }
 }
