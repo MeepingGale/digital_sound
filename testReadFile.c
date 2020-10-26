@@ -245,7 +245,7 @@ int main(int argc, char * argv[]){
             }
             index++;
         }
-        else if((await == 3 || mode == 3) && (strcmp(trimwhitespace(str), "SOUND") == 0)){
+        else if((await == 4 || mode == 4) && (strcmp(trimwhitespace(str), "SONG") == 0)){
             
         }
     }
