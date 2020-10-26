@@ -6,6 +6,8 @@
 #include "gensnd.h"
 #include "process.h"
 
+enum Modes {START, SAMPLERATE, WAVE, SOUND, SONG};
+
 typedef struct wave_t {
     char *waveName;
     char *type;
@@ -73,7 +75,6 @@ void addWaveData(wave** head_ref, char *waveName, char *type, float delay, float
     /* 7. Make last node as previous of new node */
     new_node->prev = last;
     return;
-    
 }
 
 int searchWave(wave *start, char *waveName){
@@ -111,25 +112,6 @@ int searchWave(wave *start, char *waveName){
                 return -1;
         }
 }
-void printSoundList(mySound* soundArray, int capacity){
-    for (int i = 0; i < capacity; i++) {
-        printf("\nWave name: %s\n", soundArray[i].soundName);
-        for (int j = 0; j<soundArray[i].countWaves; j++) {
-            printf("Wave index: %d\nMix values: %f\n", soundArray[i].wavesIndex[j], soundArray[i].w[j]);
-        }
-        printf("Wave count: %d\n", soundArray[i].countWaves);
-    }
-}
-void printList(wave *node)
-{
-  while (node != NULL)
-  {
-      wave *last;
-      printf("\nWave name: %s\nWave type: %s\nDelay: %f\nAttenuation: %f\n", node->waveName, node->type, node->delay, node->attenuation);
-      last = node;
-    node = node->next;
-  }
-}
 
 void addSound(mySound* soundArray, char *soundName, int index){
     soundArray[index].soundName = (char*)malloc(sizeof(char));
@@ -155,74 +137,120 @@ void addSoundData(mySound* soundArray, char *soundName, wave *head, char *waveNa
     }
 }
 
+void printSampleRate(float samplerate){
+    printf("\nSample_rate: %f\n", samplerate);
+}
+
+void printWaveList(wave *node)
+{
+  while (node != NULL)
+  {
+      wave *last;
+      printf("\nWave name: %s\nWave type: %s\nDelay: %f\nAttenuation: %f\n", node->waveName, node->type, node->delay, node->attenuation);
+      last = node;
+    node = node->next;
+  }
+}
+
+void printSoundList(mySound* soundArray, int capacity){
+    for (int i = 0; i < capacity; i++) {
+        printf("\nWave name: %s\n", soundArray[i].soundName);
+        for (int j = 0; j<soundArray[i].countWaves; j++) {
+            printf("Wave index: %d\nMix values: %f\n", soundArray[i].wavesIndex[j], soundArray[i].w[j]);
+        }
+        printf("Wave count: %d\n", soundArray[i].countWaves);
+    }
+}
+
+void printWave(char* waveName, char* waveType, float delay, float attenuation){
+    printf("\nWave name: %s\nWave type: %s\nDelay: %f\nAttenuation: %f\n", waveName, waveType, delay, attenuation);
+}
+
+void printSound(char* soundName, char** waveName,float *w){
+    printf("\nSound name: %s\n", soundName);
+    for (int i =0; waveName[i] != NULL; i++) {
+        printf("Wave name: %s\n W: %f\n", waveName[i], w[i]);
+    }
+}
+
 int main(int argc, char * argv[]){
-    wave* head = NULL;
-    int capacity = 1;
+    FILE *fp;
+    char str[255];
+    char* filename = "samplerate.txt";
+    
+    fp = fopen(filename, "r");
+    if (fp == NULL){
+        printf("Could not open file %s",filename);
+        return 1;
+    }
+    
+    float sampleRate = 0.0;
+    enum Modes mode = START;
+    enum Modes await;
+    wave* waveHead = NULL;
+    char waveName[255];
+    char waveType[10];
+    char * pch;
+    float waveValues[2];
+    char soundName[255];
+    int capacity = 0;
     int index = 0;
-    int waveCount = 0;
     mySound* soundArray = malloc(sizeof(mySound));
-    char str1[12] = "mywave1";
-    char str2[12] = "sine";
-    float delay = 0.1;
-    float attenuation = 0.2;
-    addWaveData(&head, str1, str2, delay, attenuation);
-    //printList(head);
-    char str3[12] = "mywave2";
-    char str4[12] = "saw";
-    float delay1 = 0.3;
-    float attenuation2 = 0.4;
-    addWaveData(&head, str3, str4, delay1, attenuation2);
-    char str5[12] = "mywave3";
-    char str6[12] = "triangle";
-    float delay2 = 0.3;
-    float attenuation3 = 0.4;
-    addWaveData(&head, str5, str6, delay2, attenuation3);
     
-    char str7[12] = "mysound1";
-    addSound(soundArray, str7, index);
-    char str8[12] = "mywave1";
-    float w1 = 0.4;
-    waveCount++;
-    addSoundData(soundArray, str7, head, str8, waveCount, capacity, w1);
-    char str9[12] = "mywave2";
-    float w2 = 0.3;
-    waveCount++;
-    addSoundData(soundArray, str7, head, str9, waveCount, capacity, w2);
-    char str10[12] = "mywave3";
-    float w3 = 0.7;
-    waveCount++;
-    addSoundData(soundArray, str7, head, str10, waveCount, capacity, w3);
-    
-    capacity++;
-    index++;
-    waveCount = 0;
-    soundArray = realloc(soundArray, sizeof(mySound) * capacity);
-    char str11[12] = "mysound2";
-    addSound(soundArray, str11, index);
-    char str12[12] = "mywave1";
-    float w4 = 0.2;
-    waveCount++;
-    addSoundData(soundArray, str11, head, str12, waveCount, capacity, w4);
-    char str13[12] = "mywave2";
-    float w5 = 0.9;
-    waveCount++;
-    addSoundData(soundArray, str11, head, str13, waveCount, capacity, w5);
-    
-    capacity++;
-    index++;
-    waveCount = 0;
-    soundArray = realloc(soundArray, sizeof(mySound) * capacity);
-    char str14[12] = "mysound3";
-    addSound(soundArray, str14, index);
-    char str15[12] = "mywave2";
-    float w6 = 0.4;
-    waveCount++;
-    addSoundData(soundArray, str14, head, str15, waveCount, capacity, w6);
-    char str16[12] = "mywave3";
-    float w7 = 0.2;
-    waveCount++;
-    addSoundData(soundArray, str14, head, str16, waveCount, capacity, w7);
-    
-    printList(head);
+    while (fgets(str, 255, fp) != NULL) {
+        if(mode == 0 && (strcmp(trimwhitespace(str), "SAMPLERATE") == 0)){
+            mode = SAMPLERATE;
+            await = WAVE;
+            sampleRate = atoi(fgets(str, 255, fp));
+            printSampleRate(sampleRate); //Do Stuff
+        }
+        else if((await == 2 || mode == 2) && (strcmp(trimwhitespace(str), "WAVE") == 0)){
+            mode = WAVE;
+            await = SOUND;
+            strcpy(waveName,trimwhitespace(fgets(str, 255, fp)));
+            strcpy(waveType,trimwhitespace(fgets(str, 255, fp)));
+            fgets(str, 255, fp);
+            pch = strtok (str," ");
+            int i = 0;
+              while (pch != NULL)
+              {
+                  waveValues[i] = atof(pch);
+                  i++;
+                pch = strtok (NULL, " ");
+              }
+            addWaveData(&waveHead ,waveName, waveType, waveValues[0], waveValues[1]);
+        }
+        else if((await == 3 || mode == 3) && (strcmp(trimwhitespace(str), "SOUND") == 0)){
+            mode = SOUND;
+            await = SONG;
+            capacity++;
+            soundArray = realloc(soundArray, sizeof(mySound) * capacity);
+            strcpy(soundName, trimwhitespace(fgets(str, 255, fp)));
+            addSound(soundArray, soundName, index);
+            int i,j;
+            int waveCount = 0;
+            char **wavesAndW = (char**)malloc(sizeof(char));
+            while(fgets(str, 255, fp) != NULL && (strcmp(trimwhitespace(str), "\0") != 0)){
+                i = 0;
+                pch = strtok (str," ");
+                while (pch != NULL)
+                {
+                    wavesAndW[i] = malloc(strlen(pch)+1);
+                    strcpy(wavesAndW[i], trimwhitespace(pch));
+                    i++;
+                    pch = strtok (NULL, " ");
+                }
+                waveCount++;
+                addSoundData(soundArray, soundName, waveHead, wavesAndW[0], waveCount, capacity, atof(wavesAndW[1]));
+            }
+            index++;
+        }
+        else if((await == 3 || mode == 3) && (strcmp(trimwhitespace(str), "SOUND") == 0)){
+            
+        }
+    }
+    printWaveList(waveHead);
     printSoundList(soundArray, capacity);
+            fclose(fp);
+            return 0;
 }
