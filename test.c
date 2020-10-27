@@ -22,6 +22,13 @@ typedef struct mySound_t{
     int countWaves;
 }mySound;
 
+typedef struct songNotes_t{
+    int soundIndex;
+    float hertz;
+    float startTime;
+    float duration;
+}songNotes;
+
 char *trimwhitespace(char *str)
 {
   char *end;
@@ -111,6 +118,56 @@ int searchWave(wave *start, char *waveName){
                 return -1;
         }
 }
+
+int findWavetype(wave *start, int index){
+    wave* current = start;
+    
+    int count = 0;
+    while(current != NULL){
+        if(count == index){
+            if(strcmp(current->type, "sine") == 0)
+                return 0;
+            if(strcmp(current->type, "square") == 0)
+                return 1;
+            if(strcmp(current->type, "triangle") == 0)
+                return 2;
+            if(strcmp(current->type, "saw") == 0)
+                return 3;
+        }
+        count++;
+        current = current->next;
+    }
+    return -1;
+}
+
+float findWaveDelay(wave *start, int index){
+    wave* current = start;
+    
+    int count = 0;
+    while(current != NULL){
+        if(count == index){
+            return (current->delay);
+        }
+        count++;
+        current = current->next;
+    }
+    return -1;
+}
+
+float findWaveAtte(wave *start, int index){
+    wave* current = start;
+    
+    int count = 0;
+    while(current != NULL){
+        if(count == index){
+            return(current->attenuation);
+        }
+        count++;
+        current = current->next;
+    }
+    return -1;
+}
+
 void printSoundList(mySound* soundArray, int capacity){
     for (int i = 0; i < capacity; i++) {
         printf("\nWave name: %s\n", soundArray[i].soundName);
@@ -120,6 +177,7 @@ void printSoundList(mySound* soundArray, int capacity){
         printf("Wave count: %d\n", soundArray[i].countWaves);
     }
 }
+
 void printList(wave *node)
 {
   while (node != NULL)
@@ -155,18 +213,26 @@ void addSoundData(mySound* soundArray, char *soundName, wave *head, char *waveNa
     }
 }
 
+int searchSound(mySound* soundArray, char *soundName, int capacity){
+    for (int i = 0; i < capacity; i++) {
+        if(strcmp(soundArray[i].soundName, soundName) == 0)
+            return i;
+    }
+    return -1;
+}
+
 int main(int argc, char * argv[]){
     wave* head = NULL;
     int capacity = 1;
     int index = 0;
     int waveCount = 0;
     mySound* soundArray = malloc(sizeof(mySound));
+    
     char str1[12] = "mywave1";
     char str2[12] = "sine";
     float delay = 0.1;
     float attenuation = 0.2;
     addWaveData(&head, str1, str2, delay, attenuation);
-    //printList(head);
     char str3[12] = "mywave2";
     char str4[12] = "saw";
     float delay1 = 0.3;
@@ -223,6 +289,12 @@ int main(int argc, char * argv[]){
     waveCount++;
     addSoundData(soundArray, str14, head, str16, waveCount, capacity, w7);
     
+    char str17[12] = "mysound3";
     printList(head);
     printSoundList(soundArray, capacity);
+    
+    printf("Wave type: %d Delay: %f Attenuation: %f\n", findWavetype(head, 0), findWaveDelay(head, 0),findWaveAtte(head, 0));
+    printf("Wave type: %d Delay: %f Attenuation: %f\n", findWavetype(head, 1), findWaveDelay(head, 1),findWaveAtte(head, 1));
+    printf("Wave type: %d Delay: %f Attenuation: %f\n", findWavetype(head, 2), findWaveDelay(head, 2),findWaveAtte(head, 2));
+
 }

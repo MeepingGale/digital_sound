@@ -2,37 +2,30 @@ SAMPLERATE
 32000
 
 WAVE
-mywave1
-saw
+w1
+triangle
 0.02 0.1
 
-WAVE
-mywave2
-sine
-0.04 0.1
-
-WAVE
-mywave3
-saw
-0.02 0.4
-
 SOUND
-mysound1
-mywave1 0.4
-mywave2 0.3
-mywave3 0.7
-
-SOUND
-mysound2
-mywave2 0.9
-mywave2 0.3
+s1
+w1 0.8
 
 SONG
-mysound1 40 0 1
-mysound1 42 1 1
-mysound1 44 2 1
-mysound1 45 3 1
-mysound1 47 4 1
-mysound1 49 5 1
-mysound1 51 6 1
-mysound1 52 7 1
+s1 40 0 1
+s1 44 0 1
+s1 47 0 1
+s1 41 1.5 1
+s1 45 1.5 1
+s1 48 1.5 1
+s1 42 3.0 1
+s1 46 3.0 1
+s1 49 3.0 1
+s1 43 4.5 1
+s1 47 4.5 1
+s1 50 4.5 1
+s1 44 6.0 1
+s1 48 6.0 1
+s1 51 6.0 1
+s1 43 7.5 1
+s1 47 7.5 1
+s1 50 7.5 1

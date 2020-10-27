@@ -24,8 +24,14 @@ typedef struct mySound_t{
     int countWaves;
 }mySound;
 
-char *trimwhitespace(char *str)
-{
+typedef struct songNotes_t{
+    int soundIndex;
+    float hertz;
+    float startTime;
+    float duration;
+}songNotes;
+
+char *trimwhitespace(char *str){
   char *end;
 
   // Trim leading space
@@ -113,6 +119,63 @@ int searchWave(wave *start, char *waveName){
         }
 }
 
+int findWavetype(wave *start, int index){
+    wave* current = start;
+    
+    int count = 0;
+    while(current != NULL){
+        if(count == index){
+            if(strcmp(current->type, "sine") == 0)
+                return 0;
+            if(strcmp(current->type, "square") == 0)
+                return 1;
+            if(strcmp(current->type, "triangle") == 0)
+                return 2;
+            if(strcmp(current->type, "saw") == 0)
+                return 3;
+        }
+        count++;
+        current = current->next;
+    }
+    return -1;
+}
+
+float findWaveDelay(wave *start, int index){
+    wave* current = start;
+    
+    int count = 0;
+    while(current != NULL){
+        if(count == index){
+            return (current->delay);
+        }
+        count++;
+        current = current->next;
+    }
+    return -1;
+}
+
+float findWaveAtte(wave *start, int index){
+    wave* current = start;
+    
+    int count = 0;
+    while(current != NULL){
+        if(count == index){
+            return(current->attenuation);
+        }
+        count++;
+        current = current->next;
+    }
+    return -1;
+}
+
+int searchSound(mySound* soundArray, char *soundName, int capacity){
+    for (int i = 0; i < capacity; i++) {
+        if(strcmp(soundArray[i].soundName, soundName) == 0)
+            return i;
+    }
+    return -1;
+}
+
 void addSound(mySound* soundArray, char *soundName, int index){
     soundArray[index].soundName = (char*)malloc(sizeof(char));
     strcpy(soundArray[index].soundName, soundName);
@@ -122,8 +185,9 @@ void addSound(mySound* soundArray, char *soundName, int index){
 }
 
 void addSoundData(mySound* soundArray, char *soundName, wave *head, char *waveName, int countWaves, int capacity, float w){
-    if (soundArray == NULL) {
-        printf("Not initialize");
+    if (soundArray == NULL || searchWave(head, waveName) == -1) {
+        printf("Not initialize or unable to search the wave");
+        return;
     }
     for (int i = 0; i < capacity; i++) {
         if(strcmp(soundArray[i].soundName, soundName) == 0){
@@ -158,11 +222,20 @@ void printWaveList(wave *node)
 
 void printSoundList(mySound* soundArray, int capacity){
     for (int i = 0; i < capacity; i++) {
-        printf("\nWave name: %s\n", soundArray[i].soundName);
+        printf("\nSound name: %s\n", soundArray[i].soundName);
         for (int j = 0; j<soundArray[i].countWaves; j++) {
             printf("Wave index: %d\nMix values: %f\n", soundArray[i].wavesIndex[j], soundArray[i].w[j]);
         }
         printf("Wave count: %d\n", soundArray[i].countWaves);
+    }
+}
+
+void printNotesList(songNotes* notesArray, int capacity){
+    for (int i = 0; i < capacity; i++) {
+        printf("\nSound index: %d\n", notesArray[i].soundIndex);
+        printf("Sound hertz: %f\n", notesArray[i].hertz);
+        printf("Sound start time: %f\n", notesArray[i].startTime);
+        printf("Wave duration: %f\n", notesArray[i].duration);
     }
 }
 
@@ -189,6 +262,9 @@ int main(int argc, char * argv[]){
     int capacity = 0;
     int index = 0;
     mySound* soundArray = malloc(sizeof(mySound));
+    int capacity2 = 0;
+    int index2 = 0;
+    songNotes* notesArray = malloc(sizeof(songNotes));
     
     while (fgets(str, 255, fp) != NULL) {
         if(mode == 0 && (strcmp(trimwhitespace(str), "SAMPLERATE") == 0)){
@@ -237,28 +313,46 @@ int main(int argc, char * argv[]){
                 addSoundData(soundArray, soundName, waveHead, wavesAndW[0], waveCount, capacity, atof(wavesAndW[1]));
             }
             index++;
+            for(int z = 0; z < 2; z++){
+                free(wavesAndW[z]);
+            }
+            free(wavesAndW);
         }
         else if((await == 4 || mode == 4) && (strcmp(trimwhitespace(str), "SONG") == 0)){
             mode = SONG;
             int i;
-            char **songData = (char**)malloc(sizeof(char)*4);
+            char **songData = (char**)malloc(sizeof(char));
             while(fgets(str, 255, fp) != NULL && (strcmp(trimwhitespace(str), "\0") != 0)){
+                capacity2++;
+                notesArray = realloc(notesArray, sizeof(songNotes) * capacity2);
                 i = 0;
-                pch = strtok (str," ");
+                pch = strtok(str," ");
+                songData[0] = (char*)malloc((strlen(pch))+1);
+                strcpy(songData[0], trimwhitespace(pch));
+                notesArray[index2].soundIndex = searchSound(soundArray, songData[0], capacity);
                 while (pch != NULL)
                 {
-                    songData[i] = malloc(sizeof(char)*(strlen(pch)));
+                    songData[i] = (char*)malloc((strlen(pch))+1);
                     strcpy(songData[i], pch);
                     i++;
-                    pch = strtok (NULL, " ");
-                    puts(songData[0]);
+                    pch = strtok(NULL, " ");
                 }
-                printf("Sound name: %s Note hertz: %f Start time: %f Duration: %f\n", songData[0],  pianoKeytoHertz(atoi(songData[1])), atof(songData[2]), atof(songData[3]));
+                notesArray[index2].hertz = pianoKeytoHertz(atoi(songData[1]));
+                notesArray[index2].startTime = atof(songData[2]);
+                notesArray[index2].duration = atof(songData[3]);
+                index2++;
             }
+            for(int z = 0; z < 4; z++){
+                free(songData[z]);
+            }
+            free(songData);
         }
     }
-    //printWaveList(waveHead);
-    //printSoundList(soundArray, capacity);
+    printWaveList(waveHead);
+    printSoundList(soundArray, capacity);
+    printNotesList(notesArray, capacity2);
+    printf("\nWave type: %d Delay: %f Attenuation: %f\n", findWavetype(waveHead, 0), findWaveDelay(waveHead, 0),findWaveAtte(waveHead, 0));
+
             fclose(fp);
             return 0;
 }
