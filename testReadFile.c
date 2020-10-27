@@ -137,6 +137,10 @@ void addSoundData(mySound* soundArray, char *soundName, wave *head, char *waveNa
     }
 }
 
+float pianoKeytoHertz(int keyNumber){
+    return (pow(2, (keyNumber-49.0)/12.0)* 440);
+}
+
 void printSampleRate(float samplerate){
     printf("\nSample_rate: %f\n", samplerate);
 }
@@ -159,17 +163,6 @@ void printSoundList(mySound* soundArray, int capacity){
             printf("Wave index: %d\nMix values: %f\n", soundArray[i].wavesIndex[j], soundArray[i].w[j]);
         }
         printf("Wave count: %d\n", soundArray[i].countWaves);
-    }
-}
-
-void printWave(char* waveName, char* waveType, float delay, float attenuation){
-    printf("\nWave name: %s\nWave type: %s\nDelay: %f\nAttenuation: %f\n", waveName, waveType, delay, attenuation);
-}
-
-void printSound(char* soundName, char** waveName,float *w){
-    printf("\nSound name: %s\n", soundName);
-    for (int i =0; waveName[i] != NULL; i++) {
-        printf("Wave name: %s\n W: %f\n", waveName[i], w[i]);
     }
 }
 
@@ -227,7 +220,7 @@ int main(int argc, char * argv[]){
             soundArray = realloc(soundArray, sizeof(mySound) * capacity);
             strcpy(soundName, trimwhitespace(fgets(str, 255, fp)));
             addSound(soundArray, soundName, index);
-            int i,j;
+            int i;
             int waveCount = 0;
             char **wavesAndW = (char**)malloc(sizeof(char));
             while(fgets(str, 255, fp) != NULL && (strcmp(trimwhitespace(str), "\0") != 0)){
@@ -246,11 +239,26 @@ int main(int argc, char * argv[]){
             index++;
         }
         else if((await == 4 || mode == 4) && (strcmp(trimwhitespace(str), "SONG") == 0)){
-            
+            mode = SONG;
+            int i;
+            char **songData = (char**)malloc(sizeof(char)*4);
+            while(fgets(str, 255, fp) != NULL && (strcmp(trimwhitespace(str), "\0") != 0)){
+                i = 0;
+                pch = strtok (str," ");
+                while (pch != NULL)
+                {
+                    songData[i] = malloc(sizeof(char)*(strlen(pch)));
+                    strcpy(songData[i], pch);
+                    i++;
+                    pch = strtok (NULL, " ");
+                    puts(songData[0]);
+                }
+                printf("Sound name: %s Note hertz: %f Start time: %f Duration: %f\n", songData[0],  pianoKeytoHertz(atoi(songData[1])), atof(songData[2]), atof(songData[3]));
+            }
         }
     }
-    printWaveList(waveHead);
-    printSoundList(soundArray, capacity);
+    //printWaveList(waveHead);
+    //printSoundList(soundArray, capacity);
             fclose(fp);
             return 0;
 }

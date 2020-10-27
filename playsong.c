@@ -22,7 +22,7 @@ typedef struct wave_t {
     float attenuation;
 } wave;
 
-double pianoKeytoHertz(int keyNumber){
+float pianoKeytoHertz(int keyNumber){
     return (pow(2, (keyNumber-49.0)/12.0)* 440);
 }
 
