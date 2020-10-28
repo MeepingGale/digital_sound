@@ -27,6 +27,7 @@ sound* mix(sound *s[],float w[], int c){
     }
   }
   return mix;
+    printf("finish mixing in the fucntion\n");
 }
 
 sound* modulate(sound *s1, sound *s2){

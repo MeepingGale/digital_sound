@@ -239,6 +239,23 @@ void printNotesList(songNotes* notesArray, int capacity){
     }
 }
 
+float findSongDuration(songNotes* notesArray, int capacity){
+    int i;
+    float max = notesArray[0].startTime + notesArray[0].duration;
+    for (i = 1; i < capacity; i++) {
+        if((notesArray[i].startTime + notesArray[i].duration) > max)
+            max = notesArray[i].startTime + notesArray[i].duration;
+    }
+    return max;
+}
+
+void addSamples(float *sample, sound *temp, float startTime, float duration, float samplerate){
+    int j = 0;
+    for(int i = samplerate * startTime; i < duration * samplerate + (samplerate * startTime); i++){
+        sample[i] += temp->samples[j++];
+    }
+}
+
 int main(int argc, char * argv[]){
     FILE *fp;
     char str[255];
@@ -271,7 +288,6 @@ int main(int argc, char * argv[]){
             mode = SAMPLERATE;
             await = WAVE;
             sampleRate = atoi(fgets(str, 255, fp));
-            printSampleRate(sampleRate); //Do Stuff
         }
         else if((await == 2 || mode == 2) && (strcmp(trimwhitespace(str), "WAVE") == 0)){
             mode = WAVE;
@@ -348,11 +364,46 @@ int main(int argc, char * argv[]){
             free(songData);
         }
     }
-    printWaveList(waveHead);
-    printSoundList(soundArray, capacity);
-    printNotesList(notesArray, capacity2);
-    printf("\nWave type: %d Delay: %f Attenuation: %f\n", findWavetype(waveHead, 0), findWaveDelay(waveHead, 0),findWaveAtte(waveHead, 0));
-
+//    printWaveList(waveHead);
+//    printSoundList(soundArray, capacity);
+//   printNotesList(notesArray, capacity2);
+//    printf("\nWave type: %d Delay: %f Attenuation: %f\n", findWavetype(waveHead, 0), findWaveDelay(waveHead, 0),findWaveAtte(waveHead, 0));
+//    printf("\n%d\n", findWavetype(waveHead, soundArray[notesArray[0].soundIndex].wavesIndex[0]));
+    float *samples = (float*)calloc(findSongDuration(notesArray, capacity2) * sampleRate, sizeof(float));
+//    for(int i = 0; i < findSongDuration(notesArray, capacity2) * sampleRate; i++){
+//        //printf("i: %d sample data: %f\n", i, samples[i]);
+//        printf("hello\n");
+//    }
+    sound *temp;
+    for (int i = 0; i < capacity2; i++) {
+        int maxWaves = soundArray[notesArray[i].soundIndex].countWaves;
+        sound *s[maxWaves];
+        float mixValue[maxWaves];
+        for (int j = 0; j < maxWaves; j++) {
+            mixValue[j] = soundArray[notesArray[i].soundIndex].w[j];
+            int waveType = findWavetype(waveHead, soundArray[notesArray[i].soundIndex].wavesIndex[j]);
+            float delay = findWaveDelay(waveHead,soundArray[notesArray[i].soundIndex].wavesIndex[j]);
+            float atten = findWaveAtte(waveHead, soundArray[notesArray[i].soundIndex].wavesIndex[j]);
+            s[j] = (sound*)malloc(sizeof(sound));
+            if(waveType == 0){
+                s[j] = reverb(gensine(notesArray[i].hertz, sampleRate, notesArray[i].duration), delay, atten);
+            }
+            if(waveType == 1){
+                s[j] = reverb(genSquare(notesArray[i].hertz, sampleRate, notesArray[i].duration), delay, atten);
+            }
+            if(waveType == 2){
+                s[j] = reverb(genTriangle(notesArray[i].hertz, sampleRate, notesArray[i].duration), delay, atten);
+            }
+            if(waveType == 3){
+                s[j] = reverb(genSawtooth(notesArray[i].hertz, sampleRate, notesArray[i].duration), delay, atten);
+            }
+            temp = mix(s, mixValue, maxWaves);
+        }
+        addSamples(samples, temp, notesArray[i].startTime, notesArray[i].duration, sampleRate);
+    }
+        for(int i = 0; i < findSongDuration(notesArray, capacity2) * sampleRate; i++){
+            printf("i: %d sample data: %f\n", i, samples[i]);
+        }
             fclose(fp);
             return 0;
 }

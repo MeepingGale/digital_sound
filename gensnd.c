@@ -10,7 +10,7 @@
 //   }
 // }
 
-sound *gensine2(float hertz, float sample_rate, float duration) {
+sound *gensine(float hertz, float sample_rate, float duration) {
     sound *gensine2 = (sound*)malloc(sizeof(sound));
     gensine2->rate = sample_rate;
     gensine2->length = sample_rate * duration;
@@ -29,7 +29,7 @@ sound *gensine2(float hertz, float sample_rate, float duration) {
 //     }
 // }
 
-sound *genDTMF2(char key, float sample_rate, float duration){
+sound *genDTMF(char key, float sample_rate, float duration){
     float freq1, freq2 = 0;
     switch (key) {
         case '1':
