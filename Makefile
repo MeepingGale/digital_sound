@@ -28,9 +28,6 @@ playsong: playsong.o gensnd.o process.o
 playsong.o: gensnd.h playsong.c process.h
 	gcc -c playsong.c
 
-test: testReadFile.c gensnd.c process.c
-	gcc -o test testReadFile.c gensnd.c process.c
-
 main1b.o: gensnd.h main1b.c
 	gcc -c main1b.c
 

@@ -369,6 +369,7 @@ int main(int argc, char * argv[]){
 //   printNotesList(notesArray, capacity2);
 //    printf("\nWave type: %d Delay: %f Attenuation: %f\n", findWavetype(waveHead, 0), findWaveDelay(waveHead, 0),findWaveAtte(waveHead, 0));
 //    printf("\n%d\n", findWavetype(waveHead, soundArray[notesArray[0].soundIndex].wavesIndex[0]));
+    fclose(fp);
     float *samples = (float*)calloc(findSongDuration(notesArray, capacity2) * sampleRate, sizeof(float));
 //    for(int i = 0; i < findSongDuration(notesArray, capacity2) * sampleRate; i++){
 //        //printf("i: %d sample data: %f\n", i, samples[i]);
@@ -404,6 +405,7 @@ int main(int argc, char * argv[]){
         for(int i = 0; i < findSongDuration(notesArray, capacity2) * sampleRate; i++){
             printf("i: %d sample data: %f\n", i, samples[i]);
         }
-            fclose(fp);
-            return 0;
+    free(soundArray);
+    free(notesArray);
+    return 0;
 }
