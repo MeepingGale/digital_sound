@@ -10,6 +10,10 @@
 //   }
 // }
 
+/*
+ A function that will compute a specific hertz sound tone and then stores it in a sound pointer samples array member.
+ This method will be use for testing.
+ */
 sound *gensine(float hertz, float sample_rate, float duration) {
     sound *gensine2 = (sound*)malloc(sizeof(sound));
     gensine2->rate = sample_rate;
@@ -29,6 +33,10 @@ sound *gensine(float hertz, float sample_rate, float duration) {
 //     }
 // }
 
+/*
+ A function that will compute the phone pad character sound tone and then stores it in a sound pointer samples array member.
+ This method will be use in main1b.c for printing to standardout or write to file.
+ */
 sound *genDTMF(char key, float sample_rate, float duration){
     float freq1, freq2 = 0;
     switch (key) {
@@ -179,6 +187,10 @@ sound *genDTMF(char key, float sample_rate, float duration){
 //     }
 // }
 
+/*
+ Generates a bunch of 0s that represent silence tones and stores it the samples array.
+ Returns the sound pointer
+ */
 sound *genSilence(float sample_rate, float duration){
     sound *silence = (sound*)malloc(sizeof(sound));
     silence->rate = sample_rate;
@@ -202,6 +214,10 @@ sound *genSilence(float sample_rate, float duration){
 //     return 0;
 // }
 
+/*
+ A function that will compute a specific hertz square sound tone and then stores it in a sound pointer samples array member.
+ This method will be use for testing.
+ */
 sound *genSquare( float hertz, float sample_rate, float duration){
   sound *square = (sound*)malloc(sizeof(sound));
   square->rate = sample_rate;
@@ -213,6 +229,10 @@ sound *genSquare( float hertz, float sample_rate, float duration){
   return square;
 }
 
+/*
+ A function that will compute a specific hertz triangle sound tone and then stores it in a sound pointer samples array member.
+ This method will be use for testing.
+ */
 sound *genTriangle( float hertz, float sample_rate, float duration){
   sound *triangle = (sound*)malloc(sizeof(sound));
   triangle->rate = sample_rate;
@@ -224,6 +244,10 @@ sound *genTriangle( float hertz, float sample_rate, float duration){
   return triangle;
 }
 
+/*
+ A function that will compute a specific hertz sawtooth sound tone and then stores it in a sound pointer samples array member.
+ This method will be use for testing.
+ */
 sound *genSawtooth( float hertz, float sample_rate, float duration){
   sound *sawTooth = (sound*)malloc(sizeof(sound));
   sawTooth->rate = sample_rate;

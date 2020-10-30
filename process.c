@@ -3,6 +3,10 @@
 #include <math.h>
 #include "process.h"
 
+/*
+ A method that mix two sounds together with sound weights correspond to the sound array.
+ Returns a single finished mixed sound structs.
+ */
 sound* mix(sound *s[],float w[], int c){
   int longestLength = 0;
   float rate = 0;
@@ -27,9 +31,12 @@ sound* mix(sound *s[],float w[], int c){
     }
   }
   return mix;
-    printf("finish mixing in the fucntion\n");
 }
 
+/*
+ A method that just multiply point by point two sound signals together.
+ Returns a single finished modulated sound.
+ */
 sound* modulate(sound *s1, sound *s2){
   if(s1->length != s2->length){
     return NULL;
@@ -44,6 +51,10 @@ sound* modulate(sound *s1, sound *s2){
   return modulate;
 }
 
+/*
+ A method that does convolution by summing samples by real numbers.
+ Returns a single filtered sound.
+ */
 sound* filter(sound *s, float fir[], int c){
   if(s->length == 0){
     return NULL;
@@ -65,6 +76,11 @@ sound* filter(sound *s, float fir[], int c){
     return filter;
 }
 
+/*
+ This function calculates the fir array that is to be pass to the filter method that is to be process.
+ The delay and the attenuation are use for calculating the fir array.
+ It returns a sound array that has been filtered.
+ */
 sound* reverb(sound *s, float delay, float attenuation){
   if(attenuation >= 1 || attenuation <= 0){
     return NULL;
@@ -93,6 +109,10 @@ sound* reverb(sound *s, float delay, float attenuation){
   return reverb;
 }
 
+/*
+ This is somewhat a similar function to reverb but it is using O(n) by processing the the sound in the method directly.
+ Returns a pointer sound that has been process.
+ */
 sound* echo(sound *s, float delay, float attenuation){
     if(attenuation >= 1 || attenuation <= 0){
       return NULL;

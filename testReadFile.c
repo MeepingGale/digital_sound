@@ -6,7 +6,7 @@
 #include "gensnd.h"
 #include "process.h"
 
-enum Modes {START, SAMPLERATE, WAVE, SOUND, SONG};
+enum Modes {START, SAMPLERATE, WAVE, SOUND, SONG, PROCESS};
 
 typedef struct wave_t {
     char *waveName;
@@ -336,6 +336,7 @@ int main(int argc, char * argv[]){
         }
         else if((await == 4 || mode == 4) && (strcmp(trimwhitespace(str), "SONG") == 0)){
             mode = SONG;
+            await = PROCESS;
             int i;
             char **songData = (char**)malloc(sizeof(char));
             while(fgets(str, 255, fp) != NULL && (strcmp(trimwhitespace(str), "\0") != 0)){
@@ -370,11 +371,8 @@ int main(int argc, char * argv[]){
 //    printf("\nWave type: %d Delay: %f Attenuation: %f\n", findWavetype(waveHead, 0), findWaveDelay(waveHead, 0),findWaveAtte(waveHead, 0));
 //    printf("\n%d\n", findWavetype(waveHead, soundArray[notesArray[0].soundIndex].wavesIndex[0]));
     fclose(fp);
+    if(await == 5){
     float *samples = (float*)calloc(findSongDuration(notesArray, capacity2) * sampleRate, sizeof(float));
-//    for(int i = 0; i < findSongDuration(notesArray, capacity2) * sampleRate; i++){
-//        //printf("i: %d sample data: %f\n", i, samples[i]);
-//        printf("hello\n");
-//    }
     sound *temp;
     for (int i = 0; i < capacity2; i++) {
         int maxWaves = soundArray[notesArray[i].soundIndex].countWaves;
@@ -398,14 +396,20 @@ int main(int argc, char * argv[]){
             if(waveType == 3){
                 s[j] = reverb(genSawtooth(notesArray[i].hertz, sampleRate, notesArray[i].duration), delay, atten);
             }
-            temp = mix(s, mixValue, maxWaves);
+//            temp = mix(s, mixValue, maxWaves);
         }
+        temp = mix(s, mixValue, maxWaves);
         addSamples(samples, temp, notesArray[i].startTime, notesArray[i].duration, sampleRate);
     }
-        for(int i = 0; i < findSongDuration(notesArray, capacity2) * sampleRate; i++){
+    for(int i = 0; i < findSongDuration(notesArray, capacity2) * sampleRate; i++){
             printf("i: %d sample data: %f\n", i, samples[i]);
-        }
+    }
     free(soundArray);
     free(notesArray);
+    free(samples);
+    }
+    else{
+        printf("File format is incorrect. Please check your file.");
+    }
     return 0;
 }
