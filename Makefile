@@ -41,4 +41,4 @@ process.o: process.h process.c
 	gcc -c process.c
 
 clean:
-	rm -f gensine gendial dtmf playsong test *.o
+	rm -f gensine gendial dtmf playsong *.o
