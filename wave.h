@@ -3,8 +3,10 @@
 
 #include <stdio.h>
 
-#include "SoundSamples.cpp"
+#include "soundsamples.cpp"
 
 SoundSamples* generateSamples(float frequency, float samplerate, float duration);
+
+float generateFunction(float time);
 
 #endif
