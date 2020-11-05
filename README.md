@@ -4,10 +4,10 @@ Sound is simply a wave transmitted through the atmospherethrough changing pressu
 
 ### Table of Usage Contents
 
-- [Part 1a](##Part-1a)
-- [Part 1b](##Part-1b)
-- [Part 1c](##Part-1c)
-- [DTMF Reference](###DTMF)
+- [Part 1a](#Part-1a)
+- [Part 1b](#Part-1b)
+- [Part 1c](#Part-1c)
+- [DTMF Reference](#DTMF)
 
 ### Usage
 
