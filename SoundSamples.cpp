@@ -1,14 +1,14 @@
-#include <cstdlib>
-#include <iostream>
+#include "SoundSamples.h"
 
 // 1a
 class SoundSamples {
-  public:
+  private:
     // 1b
     float* sequence_of_samples;
     int sample_len;
     float sample_rate;
-    
+
+public:
     // 1c
     SoundSamples() {
         sequence_of_samples = new float[0];
