@@ -21,7 +21,7 @@ class SoundSamples {
 
 public:
     SoundSamples() {
-        sequence_of_samples =
+        sequence_of_samples = new float[0];
         sample_len = 0;
         sample_rate = 8000;
         }
@@ -30,10 +30,10 @@ public:
     SoundSamples(float* samples, int sample_len, float sample_rate);
     
     //1e
-    SoundSamples(int sample_len, float sample_rate);
+    SoundSamples(int sample_len, int sample_rate);
     
     //1f
-    float getSampleRate() ;
+    int getSampleRate() ;
     
     // 1g
     SoundSamples(const SoundSamples &s);

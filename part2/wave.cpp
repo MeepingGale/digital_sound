@@ -1,43 +1,27 @@
-#include <cstring>
-
 #include "wave.h"
 
 using namespace std;
 
-class Wave {
-  public:
-    string name;
-    Wave(string name) {
-        this->name = name;
-    }
-    
-    virtual float generateFunction(float time);
-};
-
 class SineWave : public Wave {
-    float generateFunction(float time) {
-        return 0;
+    Wave::float generateFunction(float time) {
+        return sin(2.0 * M_PI * time);
     }
 };
 
 class SquareWave : public Wave {
-    float generateFunction(float time) {
-        return 0;
+    Wave::float generateFunction(float time) {
+        return 2*(2*floor(time)-floor(2* time))+1;
     }
 };
 
 class TriangleWave : public Wave {
-    float generateFunction(float time) {
-        return 0;
+    Wave::float generateFunction(float time) {
+        return 2*(fabs(2*((time)-floor(0.5 + (time)))))-1;
     }
 };
 
 class SawtoothWave : public Wave {
-    float generateFunction(float time) {
-        return 0;
+    Wave::float generateFunction(float time) {
+        return 2*((time)-floor(0.5 + (time)));
     }
 };
-
-int main() {
-    return 0;
-}
