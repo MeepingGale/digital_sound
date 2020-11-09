@@ -2,7 +2,6 @@
 #include <iostream>
 #include <cstring>
 
-#include "SoundSamples.h"
 #include "wave.h"
 #include "soundio.h"
 
@@ -22,8 +21,13 @@ int main(int argc, char* argv[]) {
     switch(stoi(argv[1])) {
         case 1:
             // Sine
-            
+        {
+            Wave *w = new SineWave("MySineWave");
+            SoundSamples *s = w->generateSamples(atof(argv[3]),atof(argv[2]),atof(argv[4]));
+            SoundIO *printer;
+            printer->OutputSound(s, argv[5]);
             break;
+        }
         case 2:
             // Square
             break;

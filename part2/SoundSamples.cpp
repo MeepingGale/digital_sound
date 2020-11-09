@@ -64,6 +64,3 @@ SoundSamples SoundSamples::operator+ (const SoundSamples& s) {
     return *results;
 }
 
-int main(){
-    return 0;
-}
