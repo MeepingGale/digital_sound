@@ -20,4 +20,5 @@ public:
     virtual float generateFunction(float time);
 };
 
+
 #endif
