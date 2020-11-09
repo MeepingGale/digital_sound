@@ -22,7 +22,7 @@ SoundSamples* Wave:: generateSamples(float frequency, float samplerate, float du
     int size =duration* samplerate;
     float* samples = new float[size];
     for (int i = 0; i < size; i++) {
-        samples[i] = generateFunction(i *frequency/samplerate);
+        samples[i] = generateFunction(i*frequency/samplerate);
     }
     SoundSamples* result = new SoundSamples(samples ,duration* samplerate, samplerate);
     return result;

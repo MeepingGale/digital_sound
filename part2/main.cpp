@@ -22,6 +22,7 @@ int main(int argc, char* argv[]) {
     switch(stoi(argv[1])) {
         case 1:
             // Sine
+            
             break;
         case 2:
             // Square
