@@ -1,10 +1,3 @@
-//
-//  SoundSamples.h
-//  
-//
-//  Created by Brendan Yeong on 11/6/20.
-//
-
 #ifndef SoundSamples_h
 #define SoundSamples_h
 #include <cstdlib>
@@ -24,7 +17,7 @@ public:
         sequence_of_samples = new float[0];
         sample_len = 0;
         sample_rate = 8000;
-        }
+    }
     
     //d
     SoundSamples(float* samples, int sample_len, float sample_rate);
