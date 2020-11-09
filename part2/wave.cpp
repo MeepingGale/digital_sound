@@ -2,26 +2,29 @@
 
 using namespace std;
 
-class SineWave : public Wave {
-    Wave::float generateFunction(float time) {
+float SineWave::generateFunction(float time) {
         return sin(2.0 * M_PI * time);
     }
-};
 
-class SquareWave : public Wave {
-    Wave::float generateFunction(float time) {
+float SquareWave::generateFunction(float time) {
         return 2*(2*floor(time)-floor(2* time))+1;
     }
-};
 
-class TriangleWave : public Wave {
-    Wave::float generateFunction(float time) {
+float TriangleWave::generateFunction(float time) {
         return 2*(fabs(2*((time)-floor(0.5 + (time)))))-1;
     }
-};
 
-class SawtoothWave : public Wave {
-    Wave::float generateFunction(float time) {
+float SawtoothWave::generateFunction(float time) {
         return 2*((time)-floor(0.5 + (time)));
     }
-};
+
+SoundSamples* Wave:: generateSamples(float frequency, float samplerate, float duration){
+    int size =duration* samplerate;
+    float* samples = new float[size];
+    for (int i = 0; i < size; i++) {
+        samples[i] = generateFunction(i *frequency/samplerate);
+    }
+    SoundSamples* result = new SoundSamples(samples ,duration* samplerate, samplerate);
+    return result;
+}
+

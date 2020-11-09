@@ -30,6 +30,16 @@ float SoundSamples::getSampleRate() {
     return sample_rate;
 }
     
+// 1i
+int SoundSamples::getSampleLen() {
+    return sample_len;
+}
+
+// 1j
+float& SoundSamples::operator[] (int i) {
+    return sequence_of_samples[i];
+}
+
     // 1h
 void SoundSamples::operator= (const SoundSamples &s ) {
     this->sequence_of_samples = new float[s.sample_len];
@@ -39,30 +49,22 @@ void SoundSamples::operator= (const SoundSamples &s ) {
     this->sample_rate = s.sample_rate;
 }
     
-    // 1i
-int SoundSamples::getSampleLen() {
-    return sample_len;
-}
-    
-    // 1j
-float SoundSamples::&operator[] (int i) {
-    return this->sequence_of_samples[i];
-}
-    
     // 1k
 SoundSamples SoundSamples::operator+ (const SoundSamples& s) {
-    int len = s.getSampleLen() + this->getSampleLen();
-    SoundSamples samples[] = new SoundSamples[len];
-    int j = 0;
-    
-    for(int i = 0; i < len; i < this->getSampleLen() ? i++ : j++) {
-        if(i < this->getSampleLen())
-            samples[i] = this->sequence_of_samples[i];
-        else
-            samples[i] = s.sequence_of_samples[j];
+    SoundSamples results;
+    results.sample_rate = this->sample_rate;
+    results.sample_len = this->sample_len + s.sample_len;
+    results.sequence_of_samples = new float[this->sample_len + s.sample_len];
+    for(int i = 0; i < this->sample_len; i++){
+        results.sequence_of_samples[i] = this->sequence_of_samples[i];
     }
-        
-    
-    return samples;
+    int j = 0;
+    for(int i = this->sample_len; i < s.sample_len+ this->sample_len; i++){
+        results.sequence_of_samples[i] = s.sequence_of_samples[j++];
+    }
+    return results;
 }
-    
+
+int main(){
+    return 0;
+}

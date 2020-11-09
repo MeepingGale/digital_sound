@@ -38,7 +38,7 @@ public:
     int getSampleLen();
     
     //1j
-    float &operator[] (int i);
+    float& operator[] (int i);
     
     //1k
     SoundSamples operator+ (const SoundSamples& s);

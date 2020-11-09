@@ -3,7 +3,10 @@
 
 #include "SoundSamples.h"
 
-#include <stdio.h>
+#include <cstdlib>
+#include <iostream>
+#include <cstring>
+#include <fstream>
 
 using namespace std;
 
