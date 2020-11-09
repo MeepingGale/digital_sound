@@ -30,10 +30,10 @@ public:
     SoundSamples(float* samples, int sample_len, float sample_rate);
     
     //1e
-    SoundSamples(int sample_len, int sample_rate);
+    SoundSamples(int sample_len, float sample_rate);
     
     //1f
-    int getSampleRate() ;
+    float getSampleRate() ;
     
     // 1g
     SoundSamples(const SoundSamples &s);

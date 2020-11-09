@@ -10,7 +10,7 @@ SoundSamples::SoundSamples(float* samples, int sample_len, float sample_rate) {
     }
     
     // 1e
-SoundSamples::SoundSamples(int sample_len, int sample_rate) {
+SoundSamples::SoundSamples(int sample_len, float sample_rate) {
         this->sequence_of_samples = new float[sample_len];
         for(int i = 0; i < sample_len; i++)
             this->sequence_of_samples[i] = 0;
@@ -28,7 +28,7 @@ SoundSamples::SoundSamples(const SoundSamples &s) {
     }
     
     // 1f
-SoundSamples::int getSampleRate() {
+SoundSamples::float getSampleRate() {
         return sample_rate;
     }
     
