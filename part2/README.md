@@ -16,10 +16,30 @@ $ make
 
 ## Part 2
 
-**TBC**
+**For main,**
 
-Will update here once it's done.
+```sh
+$ ./main <wave_type> <sample_rate> <frequency> <duration> <file_name>
+```
 
+For <wave_type>:
+1. Sine
+2. Square
+3. Triangle
+4. Saw
+
+An example command would be,
+
+```sh
+$ ./main 2 8000 440 1 square_output.txt
+```
+
+It will run the executable with
+- Wave Type:    **Square**
+- Sample Rate:  **8000**
+- Frequency:    **440**
+- Duration:     **1s**
+- File name:    **square_output.txt**
 
 License
 ----
