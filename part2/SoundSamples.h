@@ -34,6 +34,10 @@ public:
     float& operator[] (int i);
     
     SoundSamples operator+ (const SoundSamples& s);
+    
+    void reverb2( float delay, float attenuation);
+    
+    void adsr(float atime, float alevel, float dtime, float slevel, float rtime);
 };
 
 #endif

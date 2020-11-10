@@ -4,17 +4,18 @@ Sound is simply a wave transmitted through the atmosphere through changing press
 
 ### Table of Usage Contents
 
-- [Part 2](#Part-2)
+- [Part 2a](#Part-2a)
+- [Part 2b](#Part-2b)
 
 ### Usage
 
-Clone the repository. There are **1** executables: main. 
+Clone the repository. There's **1** executables: main. 
 
 ```sh
 $ make 
 ```
 
-## Part 2
+## Part 2a
 
 **For main,**
 
@@ -40,6 +41,12 @@ It will run the executable with
 - Frequency:    **440**
 - Duration:     **1s**
 - File name:    **square_output.txt**
+
+## Part 2b
+
+**TBC**
+
+Will update here once it's done.
 
 License
 ----

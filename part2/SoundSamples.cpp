@@ -67,3 +67,10 @@ SoundSamples SoundSamples::operator+ (const SoundSamples& s) {
     return *results;
 }
 
+void reverb2( float delay, float attenuation) {
+    
+}
+
+void adsr(float atime, float alevel, float dtime, float slevel, float rtime) {
+    
+}
