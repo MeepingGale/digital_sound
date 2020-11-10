@@ -6,7 +6,9 @@
 #include <cmath>
 
 #include "SoundSamples.h"
+
 using namespace std;
+
 class Wave {
 private:
     string name;
@@ -24,8 +26,7 @@ class SineWave : public Wave {
 private:
     string name;
 public:
-    SineWave(string name):Wave(name){
-        }
+    SineWave(string name):Wave(name){}
     float generateFunction(float time);
 };
 
@@ -33,8 +34,7 @@ class SquareWave : public Wave {
 private:
     string name;
 public:
-    SquareWave(string name):Wave(name){
-        }
+    SquareWave(string name):Wave(name){}
     float generateFunction(float time);
 };
 
@@ -42,8 +42,7 @@ class TriangleWave : public Wave {
 private:
     string name;
 public:
-    TriangleWave(string name):Wave(name){
-        }
+    TriangleWave(string name):Wave(name){}
     float generateFunction(float time);
 };
 
@@ -51,8 +50,7 @@ class SawtoothWave : public Wave {
 private:
     string name;
 public:
-    SawtoothWave(string name):Wave(name){
-        }
+    SawtoothWave(string name):Wave(name){}
     float generateFunction(float time);
 };
 

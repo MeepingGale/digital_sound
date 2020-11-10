@@ -11,8 +11,8 @@
 using namespace std;
 
 class SoundIO {
- public:
+public:
     static void OutputSound(SoundSamples *samples, string filename);
-
 };
+
 #endif

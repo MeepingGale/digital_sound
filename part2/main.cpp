@@ -18,25 +18,33 @@ int main(int argc, char* argv[]) {
         cout << "4. Saw" << endl;
     }
     
+    Wave *w;
+    
     switch(stoi(argv[1])) {
         case 1:
             // Sine
         {
-            Wave *w = new SineWave("MySineWave");
-            SoundSamples *s = w->generateSamples(atof(argv[3]),atof(argv[2]),atof(argv[4]));
-            SoundIO *printer;
-            printer->OutputSound(s, argv[5]);
+           w = new SineWave("MySineWave");
             break;
         }
         case 2:
             // Square
+        {
+           w = new SquareWave("MySquareWave");
             break;
+        }
         case 3:
             // Triangle
+        {
+            w = new TriangleWave("MyTriangleWave");
             break;
+        }
         case 4:
             // Saw
+        {
+            w = new SawtoothWave("MySawWave");
             break;
+        }
         default:
             cout << "Invalid Wave Type!" << endl;
             cout << "For <wave type>:" << endl;
@@ -46,6 +54,10 @@ int main(int argc, char* argv[]) {
             cout << "4. Saw" << endl;
             return 1;
     }
-        
+    
+    SoundSamples *s = w->generateSamples(atof(argv[3]),atof(argv[2]),atof(argv[4]));
+    SoundIO *printer;
+    printer->OutputSound(s, argv[5]);
+    
     return 0;
 }
