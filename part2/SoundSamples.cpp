@@ -10,7 +10,8 @@ SoundSamples::SoundSamples(float* samples, int sample_len, float sample_rate) {
     this->sample_rate = sample_rate;
 }
 
-SoundSamples::SoundSamples(int sample_len, float sample_rate) {        this->sequence_of_samples = new float[sample_len];
+SoundSamples::SoundSamples(int sample_len, float sample_rate) {
+    this->sequence_of_samples = new float[sample_len];
     
     for(int i = 0; i < sample_len; i++)
         this->sequence_of_samples[i] = 0;
@@ -78,18 +79,24 @@ void SoundSamples:: reverb2( float delay, float attenuation) {
     for(int i = 0; i < this->sample_len; i++){
         this->sequence_of_samples[i] = results[i];
     }
+    delete[] results;
 }
 
 void SoundSamples:: adsr(float atime, float alevel, float dtime, float slevel, float rtime) {
-    
-}
-
-int main(){
-    float floatArray[10] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
-    SoundSamples* result = new SoundSamples(floatArray ,10, 5);
-    result->reverb2(1, 1);
-    for (int i = 0; i < 10; i++) {
-        cout << (*result)[i] <<endl;
+    float *results = new float[this->sample_len];
+    for(int i = 0; i < this->sample_len; i++){
+        if(i < atime +1){
+        results[i] = (alevel/atime)*i;
+        }
+        else if(i >= (atime + 1) && i < (atime + dtime +1))
+            results[i] = ((alevel - slevel)/-dtime)*i + (alevel - ((alevel-slevel)/-dtime)*atime);
+        else if(i >= this->sample_len - rtime&& i < this->sample_len)
+            results[i] = (slevel/-rtime)*i + (0 - (slevel/-rtime)*(this->sample_len-1));
+        else
+            results[i] = slevel;
     }
-    return 0;
+    for(int i = 0; i < this->sample_len; i++){
+        this->sequence_of_samples[i] *= results[i];
+    }
+    delete[] results;
 }
