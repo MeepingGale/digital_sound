@@ -2,6 +2,9 @@
 #include <iostream>
 #include <cstring>
 
+#include "wave.h"
+#include "soundio.h"
+
 using namespace std;
 
 bool cond;
@@ -11,6 +14,7 @@ int main(int argc, char* argv[]) {
     int wave_type = 0;
     float delay, attenuation, atime, alevel, dtime, slevel, rtime;
     string filename;
+    float sample_rate = 8000;
     
     do {
         while(wave_type > 4 || wave_type <= 0) {
@@ -26,8 +30,8 @@ int main(int argc, char* argv[]) {
                 cin.ignore();
                 continue;
             }
+            cout<<"Please enter a value 1-4"<<endl;
         }
-        
         cond = cin.fail();
         cin.clear();
         cin.ignore();
@@ -40,10 +44,13 @@ int main(int argc, char* argv[]) {
         cout << "Enter the delay." << endl;
         cin >> delay;
         
+        if(delay >= 0){
         cond = cin.fail();
         cin.clear();
         cin.ignore();
-        
+        }else{
+            cout<<"Valid values for a delay is any number greater or equal to zero."<<endl;
+        }
     } while(cond);
     
     cond = true;
@@ -52,10 +59,13 @@ int main(int argc, char* argv[]) {
         cout << "Enter the attenuation." << endl;
         cin >> attenuation;
         
+        if(attenuation >= 0){
         cond = cin.fail();
         cin.clear();
         cin.ignore();
-        
+        }else{
+            cout<<"Valid values for an attenuation is any number greater or equal to zero."<<endl;
+        }
     } while(cond);
     
     cond = true;
@@ -67,7 +77,6 @@ int main(int argc, char* argv[]) {
         cond = cin.fail();
         cin.clear();
         cin.ignore();
-        
     } while(cond);
     
     cond = true;
@@ -76,10 +85,13 @@ int main(int argc, char* argv[]) {
         cout << "Enter the alevel." << endl;
         cin >> alevel;
         
+        if(alevel <= 1 && alevel > 0){
         cond = cin.fail();
         cin.clear();
         cin.ignore();
-        
+        }else{
+            cout<<"alevel cannot be greater than 1 and must be more than 0"<<endl;
+        }
     } while(cond);
     
     cond = true;
@@ -100,10 +112,13 @@ int main(int argc, char* argv[]) {
         cout << "Enter the slevel." << endl;
         cin >> slevel;
         
+        if(slevel <= 1 && slevel > 0){
         cond = cin.fail();
         cin.clear();
         cin.ignore();
-        
+        }else{
+            cout<<"slevel cannot be greater than 1 and must be more than 0"<<endl;
+        }
     } while(cond);
     
     cond = true;
@@ -118,10 +133,23 @@ int main(int argc, char* argv[]) {
         
     } while(cond);
     
+    if(atime + dtime + rtime > sample_rate){
+        cout << "Sum of atime, dtime, rtime is more than than the total sample time."<< endl;
+    }
     cond = true;
     
     cout << "Enter the filename." << endl;
     cin >> filename;
+    
+    cout <<"wave type " <<wave_type << endl;
+    cout <<"delay " <<delay << endl;
+    cout << "attenuation "<<attenuation << endl;
+    cout <<"atime " <<atime << endl;
+    cout << "alevel "<<alevel << endl;
+    cout <<"dtime " <<dtime << endl;
+    cout << "slevel "<<slevel << endl;
+    cout <<"rtime " <<rtime << endl;
+    cout <<"filename "<< filename<<endl;
     
     return 0;
 }
