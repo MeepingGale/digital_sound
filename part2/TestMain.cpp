@@ -141,15 +141,5 @@ int main(int argc, char* argv[]) {
     cout << "Enter the filename." << endl;
     cin >> filename;
     
-    cout <<"wave type " <<wave_type << endl;
-    cout <<"delay " <<delay << endl;
-    cout << "attenuation "<<attenuation << endl;
-    cout <<"atime " <<atime << endl;
-    cout << "alevel "<<alevel << endl;
-    cout <<"dtime " <<dtime << endl;
-    cout << "slevel "<<slevel << endl;
-    cout <<"rtime " <<rtime << endl;
-    cout <<"filename "<< filename<<endl;
-    
     return 0;
 }
