@@ -55,7 +55,6 @@ void SoundSamples::operator= (const SoundSamples &s ) {
 SoundSamples SoundSamples::operator+ (const SoundSamples& s) {
     int len = this->sample_len + s.sample_len;
     int j = 0;
-    
     SoundSamples *results = new SoundSamples(len, this->sample_rate);
     
     for(int i = 0; i < this->sample_len; i++)

@@ -28,3 +28,15 @@ SoundSamples* Wave:: generateSamples(float frequency, float samplerate, float du
     SoundSamples* result = new SoundSamples(samples ,duration * samplerate, samplerate);
     return result;
 }
+
+//A private method to generate the silence.
+SoundSamples* Wave:: generateSilence(float samplerate, float duration) {
+    int size = duration * samplerate;
+    float* samples = new float[size];
+    
+    for (int i = 0; i < size; i++)
+        samples[i] = 0;
+    
+    SoundSamples* result = new SoundSamples(samples ,duration * samplerate, samplerate);
+    return result;
+}
