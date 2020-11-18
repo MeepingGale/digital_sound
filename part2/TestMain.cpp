@@ -9,6 +9,10 @@ using namespace std;
 
 bool cond;
 
+float pianoKeytoHertz(float keyNumber){
+    return (pow(2, (keyNumber-49.0)/12.0)* 440);
+}
+
 int main(int argc, char* argv[]) {
     
     int wave_type = 0;
