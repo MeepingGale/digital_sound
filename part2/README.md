@@ -66,7 +66,14 @@ It will give out these prompts
 - Enter the slevel. **(slevel <= 1 && slevel > 0)**
 - Enter the rtime. 
 - Enter the filename.    
+- Enter the note. (Positive Number)
+- Enter a negative number to terminate!
 
+An example of notes will be,
+
+```sh
+40 42 44 45 47 49 51 52 -1
+```
 Make sure sum of atime, dtime, rtime does not exceed 8000.
 
 License
