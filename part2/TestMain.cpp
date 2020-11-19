@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstring>
 
+#include "SoundSamples.h"
 #include "wave.h"
 #include "soundio.h"
 
@@ -176,6 +177,62 @@ int main(int argc, char* argv[]) {
     cout << "Enter the filename." << endl;
     cin >> filename;
     clear();
+    
+    float note = 0;
+    
+    Wave *w;
+    
+    switch(wave_type) {
+        case 1:
+            // Sine
+            w = new SineWave("MySineWave");
+            break;
+        case 2:
+            // Square
+            w = new SquareWave("MySquareWave");
+            break;
+        case 3:
+            // Triangle
+            w = new TriangleWave("MyTriangleWave");
+            break;
+        case 4:
+            // Saw
+            w = new SawtoothWave("MySawWave");
+            break;
+        default:
+            cout << "Invalid Wave Type!" << endl;
+            cout << "For <wave type>:" << endl;
+            cout << "1. Sine" << endl;
+            cout << "2. Square" << endl;
+            cout << "3. Triangle" << endl;
+            cout << "4. Saw" << endl;
+            return 1;
+    }
+    
+    while(note >= 0) {
+        do {
+            cout << "Enter the note. (Positive Number)" << endl;
+            cout << "Enter a negative number to terminate!" << endl;
+            cin >> note;
+            clear();
+            
+            cond = cin.fail();
+            cin.clear();
+            cin.ignore();
+            
+            if(cond && note >= 0)
+                break;
+        } while(cond);
+        
+        cond = true;
+        
+        SoundSamples *samples = w->generateSamples(pianoKeytoHertz(note), sample_rate, 1);
+        samples->adsr(atime, alevel, dtime, slevel, rtime);
+        samples->reverb2(delay, attenuation);
+        SoundSamples *samples2 = w->generateSilence(sample_rate, 0.25);
+        SoundSamples result = (*samples) + (*samples2);
+        SoundIO::OutputSound(&result, filename);
+    }
     
     return 0;
 }
