@@ -1,6 +1,8 @@
-all: parta
+all: parta partb
 
 parta: main
+
+partb: main2b
 	
 main: main.o SoundSamples.o wave.o soundio.o
 	g++ -o main main.o SoundSamples.o wave.o soundio.o -lm
@@ -17,5 +19,11 @@ wave.o: wave.h wave.cpp
 soundio.o: soundio.h soundio.cpp
 	g++ -c soundio.cpp
 
+main2b: TestMain.o wave.o soundio.o
+	g++ -o main2b TestMain.o SoundSamples.o wave.o soundio.o
+
+TestMain.o: TestMain.cpp
+	g++ -c TestMain.cpp
+
 clean:
-	rm -f main *.o
+	rm -f main main2b *.o

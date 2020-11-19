@@ -18,6 +18,7 @@ public:
     }
     
     SoundSamples* generateSamples(float frequency, float samplerate, float duration);
+    SoundSamples* generateSilence(float samplerate, float duration);
     
     virtual float generateFunction(float time) = 0;
 };
