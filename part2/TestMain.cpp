@@ -10,7 +10,15 @@ using namespace std;
 bool cond;
 
 void clear() {
+#ifdef __linux__
+    system("clear");
+#endif
+    
 #ifdef __unix__
+    system("clear");
+#endif
+    
+#ifdef __FreeBSD__
     system("clear");
 #endif
     
