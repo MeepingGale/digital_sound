@@ -27,9 +27,9 @@ void clear() {
     system("cls");
 #endif
     
-//#ifdef __APPLE__
-//    system("clear");
-//#endif
+#ifdef __APPLE__
+    system("clear");
+#endif
 }
 
 float pianoKeytoHertz(float keyNumber) {

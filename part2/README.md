@@ -44,9 +44,30 @@ It will run the executable with
 
 ## Part 2b
 
-**TBC**
+**For main2b,**
 
-Will update here once it's done.
+```sh
+$ ./main2b
+```
+It will guide you to input values and returns error message if an error occurs.
+
+For <wave_type>:
+1. Sine
+2. Square
+3. Triangle
+4. Saw
+
+It will give out these prompts 
+- Enter the delay.  **delay >= 0**
+- Enter the attenuation.    **attenuation >= 0**
+- Enter the atime.  
+- Enter the alevel.  **(alevel <= 1 && alevel > 0)**
+- Enter the dtime.  
+- Enter the slevel. **(slevel <= 1 && slevel > 0)**
+- Enter the rtime. 
+- Enter the filename.    
+
+Make sure sum of atime, dtime, rtime does not exceed 8000.
 
 License
 ----
