@@ -10,6 +10,10 @@ using namespace std;
 bool cond;
 
 void clear() {
+#ifdef __unix__
+    system("clear");
+#endif
+    
 #ifdef _WIN32
     system("cls");
 #endif
