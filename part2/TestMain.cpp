@@ -27,9 +27,9 @@ void clear() {
     system("cls");
 #endif
     
-#ifdef __APPLE__
-    system("clear");
-#endif
+//#ifdef __APPLE__
+//    system("clear");
+//#endif
 }
 
 float pianoKeytoHertz(float keyNumber) {
@@ -171,6 +171,7 @@ int main(int argc, char* argv[]) {
     
     if(atime + dtime + rtime > sample_rate){
         cout << "Sum of atime, dtime, rtime is more than than the total sample time." << endl;
+        return 0;
     }
     cond = true;
     
@@ -209,10 +210,15 @@ int main(int argc, char* argv[]) {
             return 1;
     }
     
+    SoundSamples *samples2 = w->generateSilence(sample_rate, 0.25);
+    cout << "Enter the note. (Positive Number)" << endl;
+    cout << "Enter a negative number to terminate!" << endl;
+    SoundSamples finalResult;
+    SoundIO *printer;
     while(note >= 0) {
         do {
-            cout << "Enter the note. (Positive Number)" << endl;
-            cout << "Enter a negative number to terminate!" << endl;
+//            cout << "Enter the note. (Positive Number)" << endl;
+//            cout << "Enter a negative number to terminate!" << endl;
             cin >> note;
             clear();
             
@@ -223,16 +229,16 @@ int main(int argc, char* argv[]) {
             if(cond && note >= 0)
                 break;
         } while(cond);
-        
         cond = true;
-        
+        if(note >= 0){
         SoundSamples *samples = w->generateSamples(pianoKeytoHertz(note), sample_rate, 1);
         samples->adsr(atime, alevel, dtime, slevel, rtime);
         samples->reverb2(delay, attenuation);
-        SoundSamples *samples2 = w->generateSilence(sample_rate, 0.25);
         SoundSamples result = (*samples) + (*samples2);
-        SoundIO::OutputSound(&result, filename);
+        finalResult = finalResult + result;
+        }
     }
-    
+    printer->OutputSound(&finalResult, filename);
+
     return 0;
 }

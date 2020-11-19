@@ -26,4 +26,4 @@ soundio.o: soundio.h soundio.cpp
 	g++ -c soundio.cpp
 
 clean:
-	rm -f main main2b *.o
+	rm -f main main2b *.o *.txt *.out
